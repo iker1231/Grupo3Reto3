@@ -1,16 +1,22 @@
 package modelo;
 
 import java.util.ArrayList;
-import java.util.Objects;
 
 public class Entrada {
 	private int idEntrada;
 	private String fechaEmision;
 	private ArrayList<Sesion> sesiones = null;
 
+	/**
+	 * 
+	 */
 	public Entrada() {
 	}
 
+	/**
+	 * @param id_entrada
+	 * @param fechaEntrada
+	 */
 	public Entrada(int id_entrada, String fechaEntrada) {
 		this.idEntrada = idEntrada;
 		this.fechaEmision = fechaEmision;
@@ -49,6 +55,11 @@ public class Entrada {
 		return "Entrada [idEntrada=" + idEntrada + ", fechaEmision=" + fechaEmision + "]";
 	}
 
-	
+	public ArrayList<Sesion> getSesiones() {
+		return sesiones;
+	}
 
+	public void setSesiones(ArrayList<Sesion> sesiones) {
+		this.sesiones = sesiones;
+	}
 }
