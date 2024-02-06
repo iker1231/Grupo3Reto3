@@ -13,7 +13,6 @@ public class Conectorbd {
 	}
 
 	public void iniciarConexion() {
-		System.out.println("Conectando...");
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 			// Falta meter datos
@@ -23,7 +22,6 @@ public class Conectorbd {
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}
-		System.out.println("Conectado!");
 	}
 
 	public void cerrarConexion() {

@@ -1,7 +1,7 @@
 package modelo;
 
 public class Cliente {
-	private int dni;
+	private String dni;
 	private String fechaNacimiento;
 	private String nombreCli;
 	private String apellidoCli;
@@ -11,14 +11,14 @@ public class Cliente {
 	/**
 	 * @return the dni
 	 */
-	public int getDni() {
+	public String getDni() {
 		return dni;
 	}
 
 	/**
 	 * @param dni the dni to set
 	 */
-	public void setDni(int dni) {
+	public void setDni(String dni) {
 		this.dni = dni;
 	}
 
