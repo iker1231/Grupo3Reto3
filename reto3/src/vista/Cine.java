@@ -65,6 +65,14 @@ public class Cine extends JPanel {
 		});
 		btnLogOut.setBounds(452, 11, 128, 23);
 		add(btnLogOut);
+		
+		JComboBox comboBoxCine = new JComboBox();
+		comboBoxCine.setBounds(166, 87, 104, 22);
+		add(comboBoxCine);
+		
+		JComboBox comboBoxSala = new JComboBox();
+		comboBoxSala.setBounds(166, 146, 104, 22);
+		add(comboBoxSala);
 		btnExit.addMouseListener(new MouseAdapter() {
 			/**
 			 * Se llama cuando se hace clic en el botón "Salir". Cierra la aplicación al

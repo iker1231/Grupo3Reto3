@@ -40,6 +40,7 @@ public class CrearUsuario extends JPanel {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	protected static final char[] NullPointerException = null;
 	private JTextField textField;
 	private JPasswordField passwordField;
 	private JTextField textFieldDNI;
@@ -80,17 +81,21 @@ public class CrearUsuario extends JPanel {
 
 		passwordFieldPassword1 = new JPasswordField();
 		passwordFieldPassword1.addFocusListener(new FocusAdapter() {
-			@SuppressWarnings({ "deprecation"})
 			@Override
 			public void focusLost(FocusEvent e) {
 				String a = passwordFieldPassword1.getText();
 				String b = passwordFieldPassword2.getText();
-				if (!a.equals(b)) {
+				if ((a.length() == 0) && (b.length() == 0)) {
 					passwordFieldPassword1.setBackground(new Color(255, 153, 153));
 					passwordFieldPassword2.setBackground(new Color(255, 153, 153));
-				} else if (a.equals(b)) {
-					passwordFieldPassword1.setBackground(new Color(153, 255, 102));
-					passwordFieldPassword2.setBackground(new Color(153, 255, 102));
+				} else if ((a.length() != 0) && (b.length() != 0)) {
+					if (a.equals(b)) {
+						passwordFieldPassword1.setBackground(new Color(153, 255, 102));
+						passwordFieldPassword2.setBackground(new Color(153, 255, 102));
+					} else if (!a.equals(b)) {
+						passwordFieldPassword1.setBackground(new Color(255, 153, 153));
+						passwordFieldPassword2.setBackground(new Color(255, 153, 153));
+					}
 				}
 				repaint();
 			}
@@ -102,22 +107,26 @@ public class CrearUsuario extends JPanel {
 
 		passwordFieldPassword2 = new JPasswordField();
 		passwordFieldPassword2.addFocusListener(new FocusAdapter() {
-			@SuppressWarnings("deprecation")
 			@Override
 			public void focusLost(FocusEvent e) {
 				String a = passwordFieldPassword1.getText();
 				String b = passwordFieldPassword2.getText();
-				if (!a.equals(b)) {
+				if ((a.length() == 0) && (b.length() == 0)) {
 					passwordFieldPassword1.setBackground(new Color(255, 153, 153));
 					passwordFieldPassword2.setBackground(new Color(255, 153, 153));
-				} else if (a.equals(b)) {
-					passwordFieldPassword1.setBackground(new Color(153, 255, 102));
-					passwordFieldPassword2.setBackground(new Color(153, 255, 102));
+				} else if ((a.length() != 0) && (b.length() != 0)) {
+					if (a.equals(b)) {
+						passwordFieldPassword1.setBackground(new Color(153, 255, 102));
+						passwordFieldPassword2.setBackground(new Color(153, 255, 102));
+					} else if (!a.equals(b)) {
+						passwordFieldPassword1.setBackground(new Color(255, 153, 153));
+						passwordFieldPassword2.setBackground(new Color(255, 153, 153));
+					}
 				}
 				repaint();
 			}
 		});
-		
+
 		passwordFieldPassword2.setBounds(161, 133, 86, 20);
 		add(passwordFieldPassword2);
 
@@ -179,32 +188,33 @@ public class CrearUsuario extends JPanel {
 		btnCrear.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				if (passwordFieldPassword1.getText().equals(passwordFieldPassword2.getText())) {
-					System.out.println("enviar los datos");
-					cliente.setDni(textFieldDNI.getText());
-					cliente.setContrasena(passwordFieldPassword1.getText());
-					cliente.setNombreCli(textFieldNombre.getText());
-					cliente.setApellidoCli(textFieldApellidos.getText());
-					cliente.setGeneroCli((String) comboBoxGenero.getSelectedItem());
-					
-					System.out.println(cliente.toString());
-					
-					
-					
-					
-					v.cambiarPanel(1);
-					v.setVisible(true);
-				} else if (!passwordFieldPassword1.getText().equals(passwordFieldPassword2.getText())){
-					String a = "Las dos contraseñas deben ser iguales";
+				String a = passwordFieldPassword1.getText();
+				String b = passwordFieldPassword2.getText();
+				if ((a.length() == 0) && (b.length() == 0)) {
+					String a1 = "Las dos contraseñas deben ser iguales";
 					Error error = new Error();
-					error.error(a);
+					error.error(a1);
+				} else if ((a.length() != 0) && (b.length() != 0)) {
+					if (a.equals(b)) {
+						System.out.println("enviar los datos");
+						cliente.setDni(textFieldDNI.getText());
+						cliente.setContrasena(passwordFieldPassword1.getText());
+						cliente.setNombreCli(textFieldNombre.getText());
+						cliente.setApellidoCli(textFieldApellidos.getText());
+						cliente.setGeneroCli((String) comboBoxGenero.getSelectedItem());
+
+						System.out.println(cliente.toString());
+
+						v.cambiarPanel(1);
+						v.setVisible(true);
+					}
 				}
 			}
-			
+
 		});
 		btnExit.addMouseListener(new MouseAdapter() {
 
-	/**
+			/**
 			 * Se llama cuando se hace clic en el botón "Salir". Cierra la aplicación al
 			 * llamar a System.exit(0).
 			 * 

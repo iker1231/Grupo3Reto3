@@ -35,9 +35,11 @@ public class Login extends JPanel {
 	private JTextField textField;
 	private JPasswordField passwordField;
 	private JTextField textField_1;
-	private JPasswordField passwordField_1;
-
+	private JPasswordField passwordField_1;public Login() {
+		// TODO Auto-generated constructor stub
+	}
 	public Login(GestorVentanas v) {
+
 		setLayout(null);
 
 		JButton btnExit = new JButton("Salir");
