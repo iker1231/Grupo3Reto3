@@ -24,25 +24,19 @@ import java.beans.PropertyChangeEvent;
 import javax.swing.SwingConstants;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import vista.Error;
-import modelo.Cliente;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
-public class Login extends JPanel {
+public class Plantilla extends JPanel {
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 	private JTextField textField;
 	private JPasswordField passwordField;
-	private JTextField textField_1;
-	private JPasswordField passwordField_1;
 
-	public Login() {
-		// TODO Auto-generated constructor stub
-	}
-
-	public Login(GestorVentanas v) {
-
+	public Plantilla(GestorVentanas v) {
+		setSize(590, 440);
 		setLayout(null);
 
 		JButton btnExit = new JButton("Salir");
@@ -50,38 +44,27 @@ public class Login extends JPanel {
 		add(btnExit);
 
 		JButton btnAtras = new JButton("Atras");
-		btnAtras.setBounds(10, 413, 89, 23);
+		btnAtras.setBounds(10, 444, 89, 23);
 		add(btnAtras);
-
+		
 		JButton btnLogOut = new JButton("Cerrar Sesión");
-		btnLogOut.setBounds(440, 11, 128, 23);
+		btnLogOut.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				int ventanaYesNot = JOptionPane.showConfirmDialog(null, "¿Seguro que desea Cerrar Sesión?", v.getTitle(),
+						JOptionPane.YES_NO_OPTION);
+				// 0=yes, 1=no, 2=cancel
+				if (ventanaYesNot == 0) {
+					v.cambiarPanel(1);
+					v.setVisible(true);
+				} else if (ventanaYesNot == 1) {
+
+				}
+				
+			}
+		});
+		btnLogOut.setBounds(366, 11, 128, 23);
 		add(btnLogOut);
-
-		JLabel lblDNI = new JLabel("DNI");
-		lblDNI.setBounds(166, 166, 46, 14);
-		add(lblDNI);
-
-		JLabel lblPassword = new JLabel("Contraseña");
-		lblPassword.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblPassword.setBounds(126, 227, 86, 14);
-		add(lblPassword);
-
-		textField_1 = new JTextField();
-		textField_1.setBounds(272, 163, 86, 20);
-		add(textField_1);
-		textField_1.setColumns(10);
-
-		JButton btnLogIn = new JButton("Log in");
-		btnLogIn.setBounds(310, 292, 89, 23);
-		add(btnLogIn);
-
-		passwordField_1 = new JPasswordField();
-		passwordField_1.setBounds(272, 224, 86, 20);
-		add(passwordField_1);
-
-		JButton btnCrear = new JButton("Nuevo usuario");
-		btnCrear.setBounds(130, 292, 150, 23);
-		add(btnCrear);
 		btnExit.addMouseListener(new MouseAdapter() {
 			/**
 			 * Se llama cuando se hace clic en el botón "Salir". Cierra la aplicación al
@@ -104,31 +87,10 @@ public class Login extends JPanel {
 		btnAtras.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				v.cambiarPanel(0);
+				/*
+				v.cambiarPanel(n);
 				v.setVisible(true);
-			}
-		});
-		btnLogOut.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				String a = "No hay sesión iniciada";
-				Error error = new Error();
-				error.error(a);
-			}
-		});
-		btnLogIn.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				// llamar y comparar dnis
-				v.cambiarPanel(3);
-				v.setVisible(true);
-			}
-		});
-		btnCrear.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				v.cambiarPanel(2);
-				v.setVisible(true);
+				*/
 			}
 		});
 
