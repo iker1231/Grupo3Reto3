@@ -97,5 +97,5 @@ public class Cliente {
 		return "Cliente [dni=" + dni + ", fechaNacimiento=" + fechaNacimiento + ", nombreCli=" + nombreCli
 				+ ", apellidoCli=" + apellidoCli + ", generoCli=" + generoCli + ", contrasena=" + contrasena + "]";
 	}
-
+ 
 }

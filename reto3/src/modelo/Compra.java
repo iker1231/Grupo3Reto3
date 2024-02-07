@@ -1,6 +1,7 @@
 package modelo;
 
 public class Compra {
+
 	private int idCompra;
 	private String fechaCompra;
 	private float precioTotal;
@@ -67,5 +68,4 @@ public class Compra {
 		return "Compra [idCompra=" + idCompra + ", fechaCompra=" + fechaCompra + ", precioTotal=" + precioTotal
 				+ ", descuento=" + descuento + "]";
 	}
-
 }
