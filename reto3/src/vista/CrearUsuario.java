@@ -59,7 +59,7 @@ public class CrearUsuario extends JPanel {
 		add(btnExit);
 
 		JButton btnAtras = new JButton("Atras/Cancelar");
-		btnAtras.setBounds(10, 266, 89, 23);
+		btnAtras.setBounds(10, 266, 140, 23);
 		add(btnAtras);
 
 		JButton btnCrear = new JButton("Crear");
