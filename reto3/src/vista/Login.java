@@ -35,7 +35,7 @@ public class Login extends JPanel {
 	private static final long serialVersionUID = 1L;
 	private JTextField textField;
 	private JPasswordField passwordField;
-	private JTextField textField_1;
+	private JTextField dniField_1;
 	private JPasswordField passwordField_1;
 
 	public Login() {
@@ -67,10 +67,10 @@ public class Login extends JPanel {
 		lblPassword.setBounds(126, 227, 86, 14);
 		add(lblPassword);
 
-		textField_1 = new JTextField();
-		textField_1.setBounds(272, 163, 86, 20);
-		add(textField_1);
-		textField_1.setColumns(10);
+		dniField_1 = new JTextField();
+		dniField_1.setBounds(272, 163, 86, 20);
+		add(dniField_1);
+		dniField_1.setColumns(10);
 
 		JButton btnLogIn = new JButton("Log in");
 		btnLogIn.setBounds(310, 292, 89, 23);
@@ -120,8 +120,10 @@ public class Login extends JPanel {
 		btnLogIn.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				String DNIvalue = dniField_1.getText();
+				String ContrasenaValue = passwordField_1.getText();
 				// llama a la BD y coge los DNI
-				if (clientesSql.validarLogin(lblDNI.getText(), lblPassword.getText())) {
+				if (clientesSql.validarLogin(DNIvalue, ContrasenaValue)) {
 					v.cambiarPanel(3);
 					v.setVisible(true);
 				}

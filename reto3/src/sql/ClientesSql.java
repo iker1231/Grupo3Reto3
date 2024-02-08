@@ -23,7 +23,7 @@ public class ClientesSql {
 
 			statement = connection.createStatement();
 
-			String sql = "insert into cliente (DNI, Nombre, Apellido, Sexo, Contraseña, Usuario) VALUES ('"
+			String sql = "insert into cliente (DNI, Nombre, Apellido, Genero, Contraseña) VALUES ('"
 					+ cliente.getDni() + " ','" + cliente.getNombreCli() + "','" + cliente.getApellidoCli() + "','"
 					+ cliente.getGeneroCli() + "','" + cliente.getContrasena() + "')";
 
@@ -50,7 +50,7 @@ public class ClientesSql {
 		}
 	}
 
-	public boolean validarLogin(String usuario, String contraseña) {
+	public boolean validarLogin(String Dni, String Contrasena) {
 
 		boolean ret = false;
 
@@ -63,15 +63,15 @@ public class ClientesSql {
 
 			statement = connection.createStatement();
 
-			String sql = "select * from cliente where usuario = '" + usuario + "' and contraseña = '" + contraseña
+			String sql = "select * from cliente where DNI = '" + Dni + "' and Contraseña = '" + Contrasena
 					+ "'";
 			resultSet = statement.executeQuery(sql);
 
 			if (resultSet.next()) {
-				JOptionPane.showMessageDialog(null, "Usuario y contraseña correctos");
+				JOptionPane.showMessageDialog(null, "DNI y contraseña correctos");
 				ret = true;
 			} else {
-				JOptionPane.showMessageDialog(null, "Usuario y/o contraseña incorrectos");
+				JOptionPane.showMessageDialog(null, "DNI y/o contraseña incorrectos");
 			}
 
 		} catch (SQLException sqle) {
