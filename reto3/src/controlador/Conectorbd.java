@@ -12,18 +12,20 @@ public class Conectorbd {
 		iniciarConexion();
 	}
 
-	private void iniciarConexion() {
-		System.out.println("Conectando...");
+
+	public void iniciarConexion() {
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
-			//Falta meter datos
-			conexion = DriverManager.getConnection("", "root", "");
+			conexion = DriverManager.getConnection("jdbc:mysql://localhost/reto3_grupo3", "grupo3", "Grupo_Tres_3");
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}
+
 		System.out.println("Conectado!");
+
 	}
 
 	public void cerrarConexion() {
