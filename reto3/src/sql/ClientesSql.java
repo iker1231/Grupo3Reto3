@@ -23,7 +23,7 @@ public class ClientesSql {
 
 			statement = connection.createStatement();
 
-			String sql = "insert into cliente (DNI, Nombre, Apellido, Genero, Contraseña) VALUES ('"
+			String sql = "insert into cliente (DNI, NombreCli, ApellidoCli, Genero, Contraseña) VALUES ('"
 					+ cliente.getDni() + " ','" + cliente.getNombreCli() + "','" + cliente.getApellidoCli() + "','"
 					+ cliente.getGeneroCli() + "','" + cliente.getContrasena() + "')";
 
