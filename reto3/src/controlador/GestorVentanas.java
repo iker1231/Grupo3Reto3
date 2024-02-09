@@ -15,13 +15,14 @@ public class GestorVentanas extends JFrame{
 	
 	private static final long serialVersionUID = 1L;
 	private JFrame frame;
-	//as
+	//ahshs
 	public GestorVentanas() {
 		setSize(600, 480);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setResizable(false);
 		setTitle("Cine Elorrieta");
 	}
+	//esto
 	public void lanzarVentana() {
 		this.cambiarPanel(0);
 		this.setVisible(true);

@@ -4,6 +4,8 @@ import javax.swing.JFrame;
 
 import controlador.Conectorbd;
 import controlador.GestorVentanas;
+import sql.ClientesSql;
+
 import javax.swing.JTextField;
 import javax.swing.JPasswordField;
 import javax.swing.JLabel;
@@ -57,7 +59,7 @@ public class CrearUsuario extends JPanel {
 		JButton btnExit = new JButton("Salir");
 		btnExit.setBounds(10, 11, 89, 23);
 		add(btnExit);
-		//as
+
 		JButton btnAtras = new JButton("Atras/Cancelar");
 		btnAtras.setBounds(10, 266, 140, 23);
 		add(btnAtras);
@@ -204,7 +206,7 @@ public class CrearUsuario extends JPanel {
 						cliente.setGeneroCli((String) comboBoxGenero.getSelectedItem());
 
 						System.out.println(cliente.toString());
-
+						
 						v.cambiarPanel(1);
 						v.setVisible(true);
 					}

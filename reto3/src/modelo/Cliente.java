@@ -21,7 +21,7 @@ public class Cliente {
 	public void setDni(String dni) {
 		this.dni = dni;
 	}
-	//as
+
 	/**
 	 * @return the fechaNacimiento
 	 */
@@ -97,5 +97,5 @@ public class Cliente {
 		return "Cliente [dni=" + dni + ", fechaNacimiento=" + fechaNacimiento + ", nombreCli=" + nombreCli
 				+ ", apellidoCli=" + apellidoCli + ", generoCli=" + generoCli + ", contrasena=" + contrasena + "]";
 	}
-
+ 
 }

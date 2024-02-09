@@ -19,7 +19,7 @@ public class Pelicula {
 		this.generoPe = generoPe;
 		this.duracion = duracion;
 	}
-	//as
+
 	/**
 	 * @return the idPelicula
 	 */
