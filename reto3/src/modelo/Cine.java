@@ -10,7 +10,7 @@ public class Cine {
 	public int getIdCine() {
 		return idCine;
 	}
-
+	//a
 	/**
 	 * @param idCine the idCine to set
 	 */

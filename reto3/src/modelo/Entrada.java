@@ -21,7 +21,7 @@ public class Entrada {
 		this.idEntrada = idEntrada;
 		this.fechaEmision = fechaEmision;
 	}
-
+	//a
 	/**
 	 * @return the idEntrada
 	 */

@@ -27,7 +27,7 @@ public class Sesion {
 	public String getIdioma() {
 		return idioma;
 	}
-
+	//a
 	/**
 	 * @param idioma the idioma to set
 	 */

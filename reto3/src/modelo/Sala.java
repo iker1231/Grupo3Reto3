@@ -24,7 +24,7 @@ public class Sala {
 	public String getNombreSala() {
 		return nombreSala;
 	}
-
+	//a
 	/**
 	 * @param nombreSala the nombreSala to set
 	 */
