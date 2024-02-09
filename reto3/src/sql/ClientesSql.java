@@ -13,7 +13,7 @@ import modelo.Cliente;
 public class ClientesSql {
 
 	public void insertarCliente(Cliente cliente) {
-//aa
+//aass
 		Connection connection = null;
 
 		Statement statement = null;
