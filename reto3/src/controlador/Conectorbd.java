@@ -7,7 +7,7 @@ import java.sql.SQLException;
 public class Conectorbd {
 
 	private Connection conexion;
-
+//ss
 	public Conectorbd() {
 		iniciarConexion();
 	}
