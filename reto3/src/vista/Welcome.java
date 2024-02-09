@@ -42,7 +42,7 @@ public class Welcome extends JPanel{
 
 		// Agregar un MouseListener al panel
 		addMouseListener(new MouseListener() {
-			//a
+			//aa
 			@Override
 			public void mouseReleased(MouseEvent e) {
 				// TODO Auto-generated method stub

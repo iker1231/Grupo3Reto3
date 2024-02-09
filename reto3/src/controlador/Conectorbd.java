@@ -5,7 +5,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class Conectorbd {
-	//a
+	//s
 
 	private Connection conexion;
 

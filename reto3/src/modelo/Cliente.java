@@ -21,7 +21,7 @@ public class Cliente {
 	public void setDni(String dni) {
 		this.dni = dni;
 	}
-	//a
+	//as
 	/**
 	 * @return the fechaNacimiento
 	 */

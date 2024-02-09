@@ -19,7 +19,7 @@ public class Compra {
 	public void setIdCompra(int idCompra) {
 		this.idCompra = idCompra;
 	}
-	//a
+	//as
 	/**
 	 * @return the fechaCompra
 	 */

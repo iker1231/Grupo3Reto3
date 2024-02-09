@@ -15,7 +15,7 @@ public class GestorVentanas extends JFrame{
 	
 	private static final long serialVersionUID = 1L;
 	private JFrame frame;
-	//a
+	//as
 	public GestorVentanas() {
 		setSize(600, 480);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);

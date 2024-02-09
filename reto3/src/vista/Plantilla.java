@@ -60,7 +60,7 @@ public class Plantilla extends JPanel {
 				} else if (ventanaYesNot == 1) {
 
 				}
-				//a
+				//as
 			}
 		});
 		btnLogOut.setBounds(366, 11, 128, 23);

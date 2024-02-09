@@ -40,7 +40,7 @@ public class Login extends JPanel {
 	public Login() {
 		// TODO Auto-generated constructor stub
 	}
-	//a
+	//as
 	public Login(GestorVentanas v) {
 
 		setLayout(null);
