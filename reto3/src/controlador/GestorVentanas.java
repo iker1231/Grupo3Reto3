@@ -22,6 +22,7 @@ public class GestorVentanas extends JFrame{
 		setResizable(false);
 		setTitle("Cine Elorrieta");
 	}
+	//esto
 	public void lanzarVentana() {
 		this.cambiarPanel(0);
 		this.setVisible(true);
