@@ -69,7 +69,7 @@ public class Cine extends JPanel {
 		JComboBox comboBoxCine = new JComboBox();
 		comboBoxCine.setBounds(166, 87, 104, 22);
 		add(comboBoxCine);
-		//as
+		
 		JComboBox comboBoxSala = new JComboBox();
 		comboBoxSala.setBounds(166, 146, 104, 22);
 		add(comboBoxSala);

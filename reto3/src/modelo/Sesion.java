@@ -6,14 +6,13 @@ public class Sesion {
 	private float precio;
 	private String fechaSesion;
 	private int horario;
-
 	/**
 	 * @return the idSesion
 	 */
 	public int getIdSesion() {
 		return idSesion;
 	}
-
+  
 	/**
 	 * @param idSesion the idSesion to set
 	 */
@@ -22,26 +21,18 @@ public class Sesion {
 	}
 
 	/**
-	 * @return the idioma
-	 */
-	public String getIdioma() {
-		return idioma;
-	}
-	//as
-	/**
 	 * @param idioma the idioma to set
 	 */
 	public void setIdioma(String idioma) {
 		this.idioma = idioma;
 	}
-
+  
 	/**
 	 * @return the precio
 	 */
 	public float getPrecio() {
 		return precio;
 	}
-
 	/**
 	 * @param precio the precio to set
 	 */

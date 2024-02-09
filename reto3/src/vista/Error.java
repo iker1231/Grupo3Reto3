@@ -10,4 +10,3 @@ public class Error {
 				null, JOptionPane.ERROR_MESSAGE);
 	}
 }
-//as
