@@ -12,8 +12,11 @@ import modelo.Cliente;
 
 public class ClientesSql {
 
+	/*
+	 * Este metodo es cuando se hace el create usurio
+	 */
 	public void insertarCliente(Cliente cliente) {
-//aas
+
 		Connection connection = null;
 
 		Statement statement = null;
@@ -23,7 +26,7 @@ public class ClientesSql {
 
 			statement = connection.createStatement();
 
-			String sql = "insert into cliente (DNI, Nombre, Apellido, Genero, Contraseña) VALUES ('"
+			String sql = "insert into cliente (DNI, NombreCli, ApellidoCli, Genero, Contraseña) VALUES ('"
 					+ cliente.getDni() + " ','" + cliente.getNombreCli() + "','" + cliente.getApellidoCli() + "','"
 					+ cliente.getGeneroCli() + "','" + cliente.getContrasena() + "')";
 
@@ -49,7 +52,9 @@ public class ClientesSql {
 			;
 		}
 	}
-
+/*
+ * Este metodo es cuando se hace el login
+ */
 	public boolean validarLogin(String Dni, String Contrasena) {
 
 		boolean ret = false;
