@@ -51,6 +51,7 @@ public class CrearUsuario extends JPanel {
 	private JTextField textFieldApellidos;
 	private JTable table;
 	private JPasswordField passwordFieldPassword2;
+	ClientesSql clientesSql = new ClientesSql();
 
 	public CrearUsuario(GestorVentanas v) {
 		Cliente cliente = new Cliente();
@@ -204,9 +205,9 @@ public class CrearUsuario extends JPanel {
 						cliente.setNombreCli(textFieldNombre.getText());
 						cliente.setApellidoCli(textFieldApellidos.getText());
 						cliente.setGeneroCli((String) comboBoxGenero.getSelectedItem());
-
 						System.out.println(cliente.toString());
 						
+						clientesSql.insertarCliente(cliente);
 						v.cambiarPanel(1);
 						v.setVisible(true);
 					}
