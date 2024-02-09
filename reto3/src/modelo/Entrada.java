@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 public class Entrada {
 	private int idEntrada;
-	private String fechaEmision;
 	private ArrayList<Sesion> sesiones = null;
 
 	/**
@@ -13,14 +12,7 @@ public class Entrada {
 	public Entrada() {
 	}
 
-	/**
-	 * @param id_entrada
-	 * @param fechaEntrada
-	 */
-	public Entrada(int id_entrada, String fechaEntrada) {
-		this.idEntrada = idEntrada;
-		this.fechaEmision = fechaEmision;
-	}
+	
 
 	/**
 	 * @return the idEntrada
@@ -36,23 +28,12 @@ public class Entrada {
 		this.idEntrada = idEntrada;
 	}
 
-	/**
-	 * @return the fechaEmision
-	 */
-	public String getFechaEmision() {
-		return fechaEmision;
-	}
 
-	/**
-	 * @param fechaEmision the fechaEmision to set
-	 */
-	public void setFechaEmision(String fechaEmision) {
-		this.fechaEmision = fechaEmision;
-	}
+
 
 	@Override
 	public String toString() {
-		return "Entrada [idEntrada=" + idEntrada + ", fechaEmision=" + fechaEmision + "]";
+		return "Entrada [idEntrada=" + idEntrada + ", fechaEmision="+ "]";
 	}
 
 	public ArrayList<Sesion> getSesiones() {
