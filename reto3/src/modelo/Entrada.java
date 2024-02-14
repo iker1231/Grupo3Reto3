@@ -1,10 +1,11 @@
 package modelo;
 
-import java.util.ArrayList;
+
 
 public class Entrada {
 	private int idEntrada;
-	private ArrayList<Sesion> sesiones = null;
+	private int idCompra;
+	private int idSesion;
 
 	/**
 	 * 
@@ -13,6 +14,57 @@ public class Entrada {
 	}
 
 	
+
+
+
+
+	public Entrada(int idEntrada, int idCompra, int idSesion) {
+		super();
+		this.idEntrada = idEntrada;
+		this.idCompra = idCompra;
+		this.idSesion = idSesion;
+	}
+
+
+
+
+
+
+	public int getIdCompra() {
+		return idCompra;
+	}
+
+
+
+
+
+
+	public void setIdCompra(int idCompra) {
+		this.idCompra = idCompra;
+	}
+
+
+
+
+
+
+	public int getIdSesion() {
+		return idSesion;
+	}
+
+
+
+
+
+
+	public void setIdSesion(int idSesion) {
+		this.idSesion = idSesion;
+	}
+
+
+
+
+
 
 	/**
 	 * @return the idEntrada
@@ -36,11 +88,4 @@ public class Entrada {
 		return "Entrada [idEntrada=" + idEntrada + ", fechaEmision="+ "]";
 	}
 
-	public ArrayList<Sesion> getSesiones() {
-		return sesiones;
-	}
-
-	public void setSesiones(ArrayList<Sesion> sesiones) {
-		this.sesiones = sesiones;
-	}
 }

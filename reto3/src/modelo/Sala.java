@@ -2,6 +2,7 @@ package modelo;
 
 public class Sala {
 	private int idSala;
+	private int idCine;
 	private String nombreSala;
 
 	/**
@@ -10,6 +11,29 @@ public class Sala {
 	public int getIdSala() {
 		return idSala;
 	}
+
+	
+
+	public int getIdCine() {
+		return idCine;
+	}
+
+
+
+	public void setIdCine(int idCine) {
+		this.idCine = idCine;
+	}
+
+
+
+	public Sala(int idSala, int idCine, String nombreSala) {
+		super();
+		this.idSala = idSala;
+		this.idCine = idCine;
+		this.nombreSala = nombreSala;
+	}
+
+
 
 	/**
 	 * @param idSala the idSala to set

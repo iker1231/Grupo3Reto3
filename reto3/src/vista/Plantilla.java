@@ -24,8 +24,9 @@ import java.beans.PropertyChangeEvent;
 import javax.swing.SwingConstants;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
+import vista.Error;
+import modelo.Cliente;
+import sql.ClientesSql;
 
 public class Plantilla extends JPanel {
 	/**
@@ -36,7 +37,7 @@ public class Plantilla extends JPanel {
 	private JPasswordField passwordField;
 
 	public Plantilla(GestorVentanas v) {
-		setSize(590, 440);
+		ClientesSql clientesSql = new ClientesSql();
 		setLayout(null);
 
 		JButton btnExit = new JButton("Salir");
@@ -44,26 +45,11 @@ public class Plantilla extends JPanel {
 		add(btnExit);
 
 		JButton btnAtras = new JButton("Atras");
-		btnAtras.setBounds(10, 444, 89, 23);
+		btnAtras.setBounds(10, 411, 89, 23);
 		add(btnAtras);
-		
-		JButton btnLogOut = new JButton("Cerrar Sesión");
-		btnLogOut.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				int ventanaYesNot = JOptionPane.showConfirmDialog(null, "¿Seguro que desea Cerrar Sesión?", v.getTitle(),
-						JOptionPane.YES_NO_OPTION);
-				// 0=yes, 1=no, 2=cancel
-				if (ventanaYesNot == 0) {
-					v.cambiarPanel(1);
-					v.setVisible(true);
-				} else if (ventanaYesNot == 1) {
 
-				}
-				
-			}
-		});
-		btnLogOut.setBounds(366, 11, 128, 23);
+		JButton btnLogOut = new JButton("Cerrar Sesión");
+		btnLogOut.setBounds(440, 11, 128, 23);
 		add(btnLogOut);
 		btnExit.addMouseListener(new MouseAdapter() {
 			/**
@@ -87,10 +73,16 @@ public class Plantilla extends JPanel {
 		btnAtras.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				/*
-				v.cambiarPanel(n);
+				v.cambiarPanel(0);
 				v.setVisible(true);
-				*/
+			}
+		});
+		btnLogOut.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				String a = "No hay sesión iniciada";
+				Error error = new Error();
+				error.error(a);
 			}
 		});
 

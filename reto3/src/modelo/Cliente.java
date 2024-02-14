@@ -15,6 +15,21 @@ public class Cliente {
 		return dni;
 	}
 
+	public Cliente(String dni, String fechaNacimiento, String nombreCli, String apellidoCli, String generoCli,
+			String contrasena) {
+		super();
+		this.dni = dni;
+		this.fechaNacimiento = fechaNacimiento;
+		this.nombreCli = nombreCli;
+		this.apellidoCli = apellidoCli;
+		this.generoCli = generoCli;
+		this.contrasena = contrasena;
+	}
+
+	public Cliente() {
+		// TODO Auto-generated constructor stub
+	}
+
 	/**
 	 * @param dni the dni to set
 	 */

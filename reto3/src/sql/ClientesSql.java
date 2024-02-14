@@ -13,7 +13,6 @@ import modelo.Cliente;
 public class ClientesSql {
 
 	public void insertarCliente(Cliente cliente) {
-//aas
 		Connection connection = null;
 
 		Statement statement = null;
@@ -32,7 +31,7 @@ public class ClientesSql {
 		} catch (SQLException sqle) {
 			JOptionPane.showMessageDialog(null, "ERROR, Vuelve a intentarlo");
 		} catch (Exception e) {
-			JOptionPane.showMessageDialog(null, "ERROR, Vuelve a intentarlo");
+			JOptionPane.showMessageDialog(null, "ERROR, Vuelve a intentarlo 1");
 		} finally {
 			try {
 				if (statement != null)
@@ -68,7 +67,6 @@ public class ClientesSql {
 			resultSet = statement.executeQuery(sql);
 
 			if (resultSet.next()) {
-				JOptionPane.showMessageDialog(null, "DNI y contraseña correctos");
 				ret = true;
 			} else {
 				JOptionPane.showMessageDialog(null, "DNI y/o contraseña incorrectos");

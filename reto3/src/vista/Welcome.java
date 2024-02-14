@@ -15,6 +15,7 @@ import javax.swing.SwingConstants;
 import controlador.GestorVentanas;
 import javax.swing.JPanel;
 import javax.swing.ImageIcon;
+import java.awt.Dimension;
 
 public class Welcome extends JPanel{
 
@@ -26,7 +27,7 @@ public class Welcome extends JPanel{
 	 * @param v 
 	 */
 	public Welcome(GestorVentanas v) {
-		setSize(v.getSize());
+		setSize(new Dimension(600, 480));
 
 		// Establecer el color de fondo y límites del panel
 		this.setBackground(new Color(204, 204, 255));

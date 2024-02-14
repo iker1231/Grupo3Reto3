@@ -24,7 +24,7 @@ public class Conectorbd {
 			e.printStackTrace();
 		}
 
-		System.out.println("Conectado!");
+		//System.out.println("Conectado!");
 
 	}
 

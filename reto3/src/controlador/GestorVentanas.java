@@ -6,7 +6,7 @@ import javax.swing.JFrame;
 
 import javax.swing.JLayeredPane;
 
-import vista.Cine;
+import vista.Pelicula;
 import vista.Welcome;
 import vista.Login;
 import vista.CrearUsuario;
@@ -42,7 +42,7 @@ public class GestorVentanas extends JFrame{
 			break;
 			
 		case 3:
-			setContentPane(new Cine(this));
+			setContentPane(new Pelicula(this));
 			break;
 			/*
 		case 8:
@@ -58,9 +58,8 @@ public class GestorVentanas extends JFrame{
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
-		    /*
 			Conectorbd gestion = new Conectorbd();
-			*/
+			
 			GestorVentanas ventanaPrincipal = new GestorVentanas();
 			ventanaPrincipal.lanzarVentana();
 	}

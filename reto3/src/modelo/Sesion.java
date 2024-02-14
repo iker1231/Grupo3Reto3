@@ -2,6 +2,8 @@ package modelo;
 
 public class Sesion {
 	private int idSesion;
+	private int idPelicula;
+	private int idSala;
 	private String idioma;
 	private float precio;
 	private String fechaSesion;
@@ -13,6 +15,52 @@ public class Sesion {
 		return idSesion;
 	}
   
+
+
+	public Sesion(int idSesion, int idPelicula, int idSala, String idioma, float precio, String fechaSesion,
+			int horario) {
+		super();
+		this.idSesion = idSesion;
+		this.idPelicula = idPelicula;
+		this.idSala = idSala;
+		this.idioma = idioma;
+		this.precio = precio;
+		this.fechaSesion = fechaSesion;
+		this.horario = horario;
+	}
+
+
+
+	public int getIdPelicula() {
+		return idPelicula;
+	}
+
+
+
+	public void setIdPelicula(int idPelicula) {
+		this.idPelicula = idPelicula;
+	}
+
+
+
+	public int getIdSala() {
+		return idSala;
+	}
+
+
+
+	public void setIdSala(int idSala) {
+		this.idSala = idSala;
+	}
+
+
+
+	public String getIdioma() {
+		return idioma;
+	}
+
+
+
 	/**
 	 * @param idSesion the idSesion to set
 	 */

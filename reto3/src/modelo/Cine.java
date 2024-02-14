@@ -4,6 +4,12 @@ public class Cine {
 	private int idCine;
 	private String nombreCine;
 
+	
+	public Cine(int idCine, String nombreCine) {
+		this.idCine = idCine;
+		this.nombreCine = nombreCine;
+	}
+
 	/**
 	 * @return the idCine
 	 */

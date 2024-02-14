@@ -15,6 +15,8 @@ import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import sql.SelectPeliSql;
+
 import javax.swing.border.LineBorder;
 import java.awt.Color;
 import java.awt.ComponentOrientation;
@@ -27,22 +29,28 @@ import java.awt.event.MouseEvent;
 import vista.Error;
 import modelo.Cliente;
 import sql.ClientesSql;
+import javax.swing.JSpinner;
+import javax.swing.JEditorPane;
+import javax.swing.JTextPane;
+import java.awt.List;
+import java.awt.Scrollbar;
+import javax.swing.JMenuBar;
+import javax.swing.Box;
 import java.awt.Component;
+import java.awt.Dimension;
 
-public class Login extends JPanel {
+public class Pelicula extends JPanel {
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 	private JTextField textField;
 	private JPasswordField passwordField;
-	private JTextField dniField_1;
-	private JPasswordField passwordField_1;
 
-	public Login(GestorVentanas v) {
+	public Pelicula(GestorVentanas v) {
 		ClientesSql clientesSql = new ClientesSql();
 		setLayout(null);
-
+		SelectPeliSql sql = new SelectPeliSql();
 		JButton btnExit = new JButton("Salir");
 		btnExit.setBounds(10, 11, 89, 23);
 		add(btnExit);
@@ -54,33 +62,48 @@ public class Login extends JPanel {
 		JButton btnLogOut = new JButton("Cerrar Sesión");
 		btnLogOut.setBounds(440, 11, 128, 23);
 		add(btnLogOut);
-
-		JLabel lblDNI = new JLabel("DNI");
-		lblDNI.setBounds(166, 166, 46, 14);
-		add(lblDNI);
-
-		JLabel lblPassword = new JLabel("Contraseña");
-		lblPassword.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblPassword.setBounds(126, 227, 86, 14);
-		add(lblPassword);
-
-		dniField_1 = new JTextField();
-		dniField_1.setBounds(272, 163, 86, 20);
-		add(dniField_1);
-		dniField_1.setColumns(10);
-
-		JButton btnLogIn = new JButton("Log in");
-		btnLogIn.setBounds(310, 292, 89, 23);
-		add(btnLogIn);
-
-		passwordField_1 = new JPasswordField();
-		passwordField_1.setBounds(272, 224, 86, 20);
-		add(passwordField_1);
-
-		JButton btnCrear = new JButton("Nuevo usuario");
-		btnCrear.setBounds(130, 292, 150, 23);
-		add(btnCrear);
 		
+		JComboBox comboBox = new JComboBox();
+		comboBox.setModel(new DefaultComboBoxModel(new String[] {"6-cine"}));
+		comboBox.setBounds(399, 269, 120, 22);
+		add(comboBox);
+		
+		JEditorPane dtrpnCartelera = new JEditorPane();
+		dtrpnCartelera.setText("cartelera");
+		dtrpnCartelera.setBounds(206, 88, 83, 155);
+		add(dtrpnCartelera);
+		
+		JTextPane txtpnSinopsis = new JTextPane();
+		txtpnSinopsis.setText("sinopsis");
+		txtpnSinopsis.setBounds(187, 290, 120, 53);
+		add(txtpnSinopsis);
+		
+		JComboBox comboBoxPelicula = new JComboBox();
+		comboBoxPelicula.setModel(new DefaultComboBoxModel(new String[] {"1-peli"}));
+		comboBoxPelicula.setToolTipText("");
+		comboBoxPelicula.setBounds(30, 87, 89, 22);
+		String[] pelis = sql.nombrePelicula();
+		for (int i = 0; i < pelis.length; i++) {
+			
+		}
+		add(comboBoxPelicula);
+		
+		JComboBox comboBox_3 = new JComboBox();
+		comboBox_3.setModel(new DefaultComboBoxModel(new String[] {"2-idioma"}));
+		comboBox_3.setBounds(206, 257, 83, 22);
+		add(comboBox_3);
+		
+		JLabel lblNewLabel = new JLabel("3 fecha\r\n4 hora \r\n5 sesion");
+		lblNewLabel.setBounds(400, 143, 143, 105);
+		add(lblNewLabel);
+		
+		JLabel lblGenero = new JLabel("genero");
+		lblGenero.setBounds(299, 88, 46, 14);
+		add(lblGenero);
+		
+		JLabel lblNewLabel_1_1 = new JLabel("New label");
+		lblNewLabel_1_1.setBounds(299, 116, 46, 14);
+		add(lblNewLabel_1_1);
 		btnExit.addMouseListener(new MouseAdapter() {
 			/**
 			 * Se llama cuando se hace clic en el botón "Salir". Cierra la aplicación al
@@ -103,35 +126,15 @@ public class Login extends JPanel {
 		btnAtras.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				v.cambiarPanel(0);
+				v.cambiarPanel(1);
 				v.setVisible(true);
 			}
 		});
 		btnLogOut.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				String a = "No hay sesión iniciada";
-				Error error = new Error();
-				error.error(a);
-			}
-		});
-		//aaa
-		btnLogIn.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				String DNIvalue = dniField_1.getText();
-				String ContrasenaValue = passwordField_1.getText();
-				// llama a la BD y coge los DNI
-				if (clientesSql.validarLogin(DNIvalue, ContrasenaValue)==true) {
-					v.cambiarPanel(3);
-					v.setVisible(true);
-				}
-			}
-		});
-		btnCrear.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				v.cambiarPanel(2);
+				JOptionPane.showMessageDialog(null, "Sesion cerrada");
+				v.cambiarPanel(1);
 				v.setVisible(true);
 			}
 		});

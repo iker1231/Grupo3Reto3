@@ -22,6 +22,7 @@ import java.awt.Color;
 import java.awt.ComponentOrientation;
 import javax.swing.ListSelectionModel;
 import java.beans.PropertyChangeListener;
+import java.sql.SQLClientInfoException;
 import java.beans.PropertyChangeEvent;
 import javax.swing.SwingConstants;
 import java.awt.event.MouseAdapter;
@@ -36,6 +37,7 @@ import java.awt.event.InputMethodListener;
 import java.awt.event.InputMethodEvent;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
+import javax.swing.JSpinner;
 
 public class CrearUsuario extends JPanel {
 	/**
@@ -88,7 +90,7 @@ public class CrearUsuario extends JPanel {
 			public void focusLost(FocusEvent e) {
 				String a = passwordFieldPassword1.getText();
 				String b = passwordFieldPassword2.getText();
-				if ((a.length() == 0) && (b.length() == 0)) {
+				if ((a.length() == 0) || (b.length() == 0)) {
 					passwordFieldPassword1.setBackground(new Color(255, 153, 153));
 					passwordFieldPassword2.setBackground(new Color(255, 153, 153));
 				} else if ((a.length() != 0) && (b.length() != 0)) {
@@ -175,9 +177,9 @@ public class CrearUsuario extends JPanel {
 		lblContrasena2.setBounds(82, 136, 69, 14);
 		add(lblContrasena2);
 
-		JLabel lblSexo = new JLabel("Sexo");
-		lblSexo.setBounds(105, 170, 38, 14);
-		add(lblSexo);
+		JLabel lblGenero = new JLabel("Genero");
+		lblGenero.setBounds(105, 170, 38, 14);
+		add(lblGenero);
 
 		JLabel lblNombre = new JLabel("Nombre");
 		lblNombre.setBounds(105, 202, 46, 14);
@@ -193,19 +195,17 @@ public class CrearUsuario extends JPanel {
 			public void mouseClicked(MouseEvent e) {
 				String a = passwordFieldPassword1.getText();
 				String b = passwordFieldPassword2.getText();
-				if ((a.length() == 0) && (b.length() == 0)) {
+				if ((a.length() == 0) || (b.length() == 0)) {
 					String a1 = "Las dos contraseñas deben ser iguales";
 					Error error = new Error();
 					error.error(a1);
 				} else if ((a.length() != 0) && (b.length() != 0)) {
 					if (a.equals(b)) {
-						System.out.println("enviar los datos");
 						cliente.setDni(textFieldDNI.getText());
 						cliente.setContrasena(passwordFieldPassword1.getText());
 						cliente.setNombreCli(textFieldNombre.getText());
 						cliente.setApellidoCli(textFieldApellidos.getText());
 						cliente.setGeneroCli((String) comboBoxGenero.getSelectedItem());
-						System.out.println(cliente.toString());
 						
 						clientesSql.insertarCliente(cliente);
 						v.cambiarPanel(1);

@@ -1,7 +1,7 @@
 package modelo;
 
 public class Compra {
-
+	private String dni;
 	private int idCompra;
 	private String fechaCompra;
 	private float precioTotal;
@@ -12,6 +12,22 @@ public class Compra {
 	 */
 	public int getIdCompra() {
 		return idCompra;
+	}
+
+	public Compra(int idCompra, String fechaCompra, float precioTotal, int descuento, String dni) {
+		super();
+		this.idCompra = idCompra;
+		this.fechaCompra = fechaCompra;
+		this.precioTotal = precioTotal;
+		this.descuento = descuento;
+	}
+
+	public String getDni() {
+		return dni;
+	}
+
+	public void setDni(String dni) {
+		this.dni = dni;
 	}
 
 	/**

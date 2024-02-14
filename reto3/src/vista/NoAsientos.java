@@ -24,22 +24,22 @@ import java.beans.PropertyChangeEvent;
 import javax.swing.SwingConstants;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import javax.swing.JTextPane;
+import vista.Error;
+import modelo.Cliente;
+import sql.ClientesSql;
+import javax.swing.JSpinner;
 
-public class Cine extends JPanel {
+public class NoAsientos extends JPanel {
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 	private JTextField textField;
 	private JPasswordField passwordField;
-	private JTextField textField_1;
-	private JTextField textField_2;
+	private JTable table;
 
-	public Cine(GestorVentanas v) {
-		setSize(450, 298);
+	public NoAsientos(GestorVentanas v) {
+		ClientesSql clientesSql = new ClientesSql();
 		setLayout(null);
 
 		JButton btnExit = new JButton("Salir");
@@ -47,42 +47,57 @@ public class Cine extends JPanel {
 		add(btnExit);
 
 		JButton btnAtras = new JButton("Atras");
-		btnAtras.setBounds(10, 264, 89, 23);
+		btnAtras.setBounds(10, 411, 89, 23);
 		add(btnAtras);
-		
+
 		JButton btnLogOut = new JButton("Cerrar Sesión");
-		btnLogOut.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				JOptionPane.showMessageDialog(null, "Sesion cerrada");
-				v.cambiarPanel(1);
-				v.setVisible(true);
-			}
-		});
-		btnLogOut.setBounds(307, 11, 128, 23);
+		btnLogOut.setBounds(440, 11, 128, 23);
 		add(btnLogOut);
 		
-		JComboBox comboBoxCine = new JComboBox();
-		comboBoxCine.setBounds(52, 45, 104, 22);
-		add(comboBoxCine);
+		table = new JTable();
+		table.setModel(new DefaultTableModel(
+			new Object[][] {
+				{"", null},
+				{null, null},
+				{null, null},
+				{null, null},
+				{null, null},
+				{null, null},
+			},
+			new String[] {
+				"New column", "New column"
+			}
+		));
+		table.setBounds(450, 82, 100, 179);
+		add(table);
 		
-		JComboBox comboBoxSala = new JComboBox();
-		comboBoxSala.setBounds(33, 183, 104, 22);
-		add(comboBoxSala);
+		JSpinner spinner = new JSpinner();
+		spinner.setBounds(83, 79, 30, 20);
+		add(spinner);
 		
-		JTextPane textPane = new JTextPane();
-		textPane.setBounds(317, 45, 67, 79);
-		add(textPane);
+		JLabel lblPrecioFinal = new JLabel("Precio Final:");
+		lblPrecioFinal.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblPrecioFinal.setBounds(20, 302, 79, 14);
+		add(lblPrecioFinal);
 		
-		textField_1 = new JTextField();
-		textField_1.setBounds(307, 135, 86, 20);
-		add(textField_1);
-		textField_1.setColumns(10);
+		JLabel lblShowPrecio = new JLabel("x€");
+		lblShowPrecio.setHorizontalAlignment(SwingConstants.LEFT);
+		lblShowPrecio.setBounds(109, 302, 46, 14);
+		add(lblShowPrecio);
 		
-		textField_2 = new JTextField();
-		textField_2.setBounds(290, 166, 128, 85);
-		add(textField_2);
-		textField_2.setColumns(10);
+		JLabel lblPrecioEntrada = new JLabel("Precio Entrada:");
+		lblPrecioEntrada.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblPrecioEntrada.setBounds(20, 279, 79, 14);
+		add(lblPrecioEntrada);
+		
+		JLabel lblShowPrecioEtrada = new JLabel("x€");
+		lblShowPrecioEtrada.setHorizontalAlignment(SwingConstants.LEFT);
+		lblShowPrecioEtrada.setBounds(109, 279, 46, 14);
+		add(lblShowPrecioEtrada);
+		
+		JLabel lblDescuento = new JLabel("-X%");
+		lblDescuento.setBounds(131, 302, 46, 14);
+		add(lblDescuento);
 		btnExit.addMouseListener(new MouseAdapter() {
 			/**
 			 * Se llama cuando se hace clic en el botón "Salir". Cierra la aplicación al
@@ -105,8 +120,16 @@ public class Cine extends JPanel {
 		btnAtras.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				v.cambiarPanel(2);
+				v.cambiarPanel(0);
 				v.setVisible(true);
+			}
+		});
+		btnLogOut.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				String a = "No hay sesión iniciada";
+				Error error = new Error();
+				error.error(a);
 			}
 		});
 
