@@ -15,6 +15,7 @@ import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+
 import sql.SelectPeliSql;
 
 import javax.swing.border.LineBorder;
@@ -24,6 +25,9 @@ import javax.swing.ListSelectionModel;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeEvent;
 import javax.swing.SwingConstants;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import vista.Error;
@@ -39,7 +43,7 @@ import javax.swing.Box;
 import java.awt.Component;
 import java.awt.Dimension;
 
-public class Pelicula extends JPanel {
+public class SelectPelicula extends JPanel {
 	/**
 	 * 
 	 */
@@ -47,7 +51,7 @@ public class Pelicula extends JPanel {
 	private JTextField textField;
 	private JPasswordField passwordField;
 
-	public Pelicula(GestorVentanas v) {
+	public SelectPelicula(GestorVentanas v) {
 		ClientesSql clientesSql = new ClientesSql();
 		setLayout(null);
 		SelectPeliSql sql = new SelectPeliSql();
@@ -62,48 +66,73 @@ public class Pelicula extends JPanel {
 		JButton btnLogOut = new JButton("Cerrar Sesión");
 		btnLogOut.setBounds(440, 11, 128, 23);
 		add(btnLogOut);
-		
+
 		JComboBox comboBox = new JComboBox();
-		comboBox.setModel(new DefaultComboBoxModel(new String[] {"6-cine"}));
+		comboBox.setModel(new DefaultComboBoxModel(new String[] { "6-cine" }));
 		comboBox.setBounds(399, 269, 120, 22);
 		add(comboBox);
-		
+
 		JEditorPane dtrpnCartelera = new JEditorPane();
 		dtrpnCartelera.setText("cartelera");
 		dtrpnCartelera.setBounds(206, 88, 83, 155);
 		add(dtrpnCartelera);
-		
+
 		JTextPane txtpnSinopsis = new JTextPane();
 		txtpnSinopsis.setText("sinopsis");
 		txtpnSinopsis.setBounds(187, 290, 120, 53);
 		add(txtpnSinopsis);
-		
+
 		JComboBox comboBoxPelicula = new JComboBox();
-		comboBoxPelicula.setModel(new DefaultComboBoxModel(new String[] {"1-peli"}));
-		comboBoxPelicula.setToolTipText("");
-		comboBoxPelicula.setBounds(30, 87, 89, 22);
+		comboBoxPelicula.removeAllItems();
 		String[] pelis = sql.nombrePelicula();
 		for (int i = 0; i < pelis.length; i++) {
-			
+			comboBoxPelicula.addItem(pelis[i]);
 		}
+		comboBoxPelicula.setToolTipText("");
+		comboBoxPelicula.setBounds(30, 87, 113, 22);
 		add(comboBoxPelicula);
-		
-		JComboBox comboBox_3 = new JComboBox();
-		comboBox_3.setModel(new DefaultComboBoxModel(new String[] {"2-idioma"}));
-		comboBox_3.setBounds(206, 257, 83, 22);
-		add(comboBox_3);
-		
+
+		JComboBox comboBoxIdioma = new JComboBox();
+		comboBoxIdioma.setVisible(false);
+		comboBoxIdioma.setModel(new DefaultComboBoxModel());
+		comboBoxIdioma.setBounds(206, 257, 83, 22);
+		add(comboBoxIdioma);
+
 		JLabel lblNewLabel = new JLabel("3 fecha\r\n4 hora \r\n5 sesion");
 		lblNewLabel.setBounds(400, 143, 143, 105);
 		add(lblNewLabel);
-		
+
 		JLabel lblGenero = new JLabel("genero");
 		lblGenero.setBounds(299, 88, 46, 14);
 		add(lblGenero);
-		
+
 		JLabel lblNewLabel_1_1 = new JLabel("New label");
 		lblNewLabel_1_1.setBounds(299, 116, 46, 14);
 		add(lblNewLabel_1_1);
+
+		
+		comboBoxPelicula.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				comboBoxIdioma.setVisible(true);
+				int a = (int) comboBoxPelicula.getSelectedIndex();
+				String[] idiom = sql.idiomPeli(a);
+				comboBoxIdioma.removeAllItems();
+				for (int i = 0; i < idiom.length; i++) {
+					comboBoxIdioma.addItem(idiom[i]);
+				}
+				repaint();
+			}
+
+		});
+		
+		comboBoxIdioma.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+
+				repaint();
+			}
+
+		});
+
 		btnExit.addMouseListener(new MouseAdapter() {
 			/**
 			 * Se llama cuando se hace clic en el botón "Salir". Cierra la aplicación al

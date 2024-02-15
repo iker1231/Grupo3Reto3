@@ -6,7 +6,7 @@ import javax.swing.JFrame;
 
 import javax.swing.JLayeredPane;
 
-import vista.Pelicula;
+import vista.SelectPelicula;
 import vista.Welcome;
 import vista.Login;
 import vista.CrearUsuario;
@@ -42,7 +42,7 @@ public class GestorVentanas extends JFrame{
 			break;
 			
 		case 3:
-			setContentPane(new Pelicula(this));
+			setContentPane(new SelectPelicula(this));
 			break;
 			/*
 		case 8:

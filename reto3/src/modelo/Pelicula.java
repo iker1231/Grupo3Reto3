@@ -20,6 +20,10 @@ public class Pelicula {
 		this.duracion = duracion;
 	}
 
+	public Pelicula() {
+		// TODO Auto-generated constructor stub
+	}
+
 	/**
 	 * @return the idPelicula
 	 */
