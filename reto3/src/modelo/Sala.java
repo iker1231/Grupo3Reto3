@@ -1,6 +1,27 @@
 package modelo;
 
+import java.util.Objects;
+
 public class Sala {
+	@Override
+	public int hashCode() {
+		return Objects.hash(idCine, idSala, nombreSala);
+	}
+
+
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Sala other = (Sala) obj;
+		return idCine == other.idCine && idSala == other.idSala && Objects.equals(nombreSala, other.nombreSala);
+	}
+
 	private int idSala;
 	private int idCine;
 	private String nombreSala;

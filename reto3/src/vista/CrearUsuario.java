@@ -206,7 +206,7 @@ public class CrearUsuario extends JPanel {
 						cliente.setNombreCli(textFieldNombre.getText());
 						cliente.setApellidoCli(textFieldApellidos.getText());
 						cliente.setGeneroCli((String) comboBoxGenero.getSelectedItem());
-						
+						//dni largo mensaje de creado
 						clientesSql.insertarCliente(cliente);
 						v.cambiarPanel(1);
 						v.setVisible(true);

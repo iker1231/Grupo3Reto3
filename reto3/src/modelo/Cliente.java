@@ -1,6 +1,27 @@
 package modelo;
 
+import java.util.Objects;
+
 public class Cliente {
+	@Override
+	public int hashCode() {
+		return Objects.hash(apellidoCli, contrasena, dni, fechaNacimiento, generoCli, nombreCli);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Cliente other = (Cliente) obj;
+		return Objects.equals(apellidoCli, other.apellidoCli) && Objects.equals(contrasena, other.contrasena)
+				&& Objects.equals(dni, other.dni) && Objects.equals(fechaNacimiento, other.fechaNacimiento)
+				&& Objects.equals(generoCli, other.generoCli) && Objects.equals(nombreCli, other.nombreCli);
+	}
+
 	private String dni;
 	private String fechaNacimiento;
 	private String nombreCli;

@@ -1,8 +1,33 @@
 package modelo;
 
-
+import java.util.Objects;
 
 public class Entrada {
+	@Override
+	public int hashCode() {
+		return Objects.hash(idCompra, idEntrada, idSesion);
+	}
+
+
+
+
+
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Entrada other = (Entrada) obj;
+		return idCompra == other.idCompra && idEntrada == other.idEntrada && idSesion == other.idSesion;
+	}
+
+
+
+
 	private int idEntrada;
 	private int idCompra;
 	private int idSesion;

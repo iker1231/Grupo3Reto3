@@ -1,6 +1,30 @@
 package modelo;
 
+import java.util.Objects;
+
 public class Sesion {
+	@Override
+	public int hashCode() {
+		return Objects.hash(fechaSesion, horario, idPelicula, idSala, idSesion, idioma, precio);
+	}
+
+
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Sesion other = (Sesion) obj;
+		return Objects.equals(fechaSesion, other.fechaSesion) && horario == other.horario
+				&& idPelicula == other.idPelicula && idSala == other.idSala && idSesion == other.idSesion
+				&& Objects.equals(idioma, other.idioma)
+				&& Float.floatToIntBits(precio) == Float.floatToIntBits(other.precio);
+	}
+
 	private int idSesion;
 	private int idPelicula;
 	private int idSala;
