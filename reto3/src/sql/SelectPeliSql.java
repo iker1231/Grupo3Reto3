@@ -141,7 +141,7 @@ public String[] darpeli(int NumP) {
 	}
 	return idiom;
 }
-public String sesion(int NumP, Date date, int hora, int min) {
+public String sesion(int NumP, Date date, String idioma) {
 	Connection connection = null;
 	ResultSet rs = null;
 	Statement statement = null;
@@ -151,10 +151,49 @@ public String sesion(int NumP, Date date, int hora, int min) {
 
 	try {
 		connection = DriverManager.getConnection("jdbc:mysql://localhost/reto3_grupo3", "grupo3", "Grupo_Tres_3");
-
 		statement = connection.createStatement();
-		System.out.println(hora);
-		String sql = "select Horario from sesion where IdPelicula ='" + NumP + "' and FechaSesion='" + date + "' and Horario >= '" + hora+ "'";
+		String sql = "select Horario from sesion where IdPelicula ='" + NumP + "' and FechaSesion='" + date + "' and Idioma = '" + idioma + "'";
+		rs = statement.executeQuery(sql);
+		rs.next();
+		String all = rs.getString("Horario");
+		a =all;
+		while ((rs.next())) {
+			
+			 i = i+1;
+		}
+
+	} catch (SQLException sqle) {
+		JOptionPane.showMessageDialog(null, "ERROR, Vuelve a intentarlo 5");
+	} catch (Exception e) {
+		JOptionPane.showMessageDialog(null, "ERROR, Vuelve a intentarlo 6");
+	}finally {
+		try {
+			if (statement != null)
+				statement.close();
+		} catch (Exception e) {
+		}
+		;
+		try {
+			if (connection != null)
+				connection.close();
+		} catch (Exception e) {
+		}
+		;
+	}
+	return a;
+}
+public String cine(int NumP, Date date, String idioma) {
+	Connection connection = null;
+	ResultSet rs = null;
+	Statement statement = null;
+	String a = null ;
+	
+	int i = 0;
+
+	try {
+		connection = DriverManager.getConnection("jdbc:mysql://localhost/reto3_grupo3", "grupo3", "Grupo_Tres_3");
+		statement = connection.createStatement();
+		String sql = "select Horario from sesion where IdPelicula ='" + NumP + "' and FechaSesion='" + date + "' and Idioma = '" + idioma + "'";
 		rs = statement.executeQuery(sql);
 		rs.next();
 		String all = rs.getString("Horario");

@@ -10,19 +10,18 @@ import vista.SelectPelicula;
 import vista.Welcome;
 import vista.Login;
 import vista.CrearUsuario;
+import vista.NoAsientos;
 
 public class GestorVentanas extends JFrame{
 	
 	private static final long serialVersionUID = 1L;
 	private JFrame frame;
-	//ahshs
 	public GestorVentanas() {
 		setSize(600, 480);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setResizable(false);
 		setTitle("Cine Elorrieta");
 	}
-	//esto
 	public void lanzarVentana() {
 		this.cambiarPanel(0);
 		this.setVisible(true);
@@ -44,10 +43,11 @@ public class GestorVentanas extends JFrame{
 		case 3:
 			setContentPane(new SelectPelicula(this));
 			break;
-			/*
-		case 8:
-			setContentPane(new EdicionAdministrador(this));
+			
+		case 4:
+			setContentPane(new NoAsientos(this));
 			break;
+			/*
 		case 9:
 			setContentPane(new Prueba(this));
 			break;

@@ -28,6 +28,7 @@ import vista.Error;
 import modelo.Cliente;
 import sql.ClientesSql;
 import javax.swing.JSpinner;
+import javax.swing.SpinnerNumberModel;
 
 public class NoAsientos extends JPanel {
 	/**
@@ -72,6 +73,7 @@ public class NoAsientos extends JPanel {
 		add(table);
 		
 		JSpinner spinner = new JSpinner();
+		spinner.setModel(new SpinnerNumberModel(Integer.valueOf(0), Integer.valueOf(0), null, Integer.valueOf(1)));
 		spinner.setBounds(83, 79, 30, 20);
 		add(spinner);
 		

@@ -71,15 +71,14 @@ public class SelectPelicula extends JPanel {
 		btnLogOut.setBounds(440, 11, 128, 23);
 		add(btnLogOut);
 
-		JComboBox comboBox = new JComboBox();
-		comboBox.setModel(new DefaultComboBoxModel(new String[] { "6-cine" }));
-		comboBox.setBounds(399, 269, 120, 22);
-		add(comboBox);
+		JComboBox comboBoxCine = new JComboBox();
+		comboBoxCine.setBounds(353, 305, 120, 22);
+		add(comboBoxCine);
 
 		JEditorPane dtrpnCartelera = new JEditorPane();
 		dtrpnCartelera.setVisible(false);
 		dtrpnCartelera.setText("cartelera");
-		dtrpnCartelera.setBounds(39, 117, 83, 155);
+		dtrpnCartelera.setBounds(39, 117, 89, 155);
 		add(dtrpnCartelera);
 
 		JTextPane txtpnSinopsis = new JTextPane();
@@ -104,83 +103,53 @@ public class SelectPelicula extends JPanel {
 		comboBoxIdioma.setBounds(39, 286, 83, 22);
 		add(comboBoxIdioma);
 
-		JLabel lblNewLabel = new JLabel("3 fecha\r\n4 hora \r\n5 sesion");
-		lblNewLabel.setBounds(353, 301, 143, 105);
-		add(lblNewLabel);
-
 		JLabel lblGenero = new JLabel("genero");
 		lblGenero.setVisible(false);
 		lblGenero.setBounds(132, 117, 46, 14);
 		add(lblGenero);
 
-		JLabel lblNewLabel_1_1 = new JLabel("New label");
-		lblNewLabel_1_1.setBounds(20, 411, 60, 21);
-		add(lblNewLabel_1_1);
-
 		JDateChooser dateChooser = new JDateChooser();
 		dateChooser.setVisible(false);
 		dateChooser.setLocale(new Locale("es"));
 		dateChooser.setDateFormatString("yyyy-MM-dd");
-		dateChooser.getJCalendar().setMinSelectableDate(new java.util.Date());
+		//dateChooser.getJCalendar().setMinSelectableDate(new java.util.Date());
 		dateChooser.setBounds(269, 87, 128, 34);
 		add(dateChooser);
 
 		Button buttonFechHora = new Button("Buscar Sesión");
 		buttonFechHora.setVisible(false);
-		buttonFechHora.setBounds(386, 175, 83, 22);
+		buttonFechHora.setBounds(374, 154, 83, 22);
 		add(buttonFechHora);
-
-		Panel panel = new Panel();
-		panel.setForeground(Color.LIGHT_GRAY);
-		FlowLayout flowLayout = (FlowLayout) panel.getLayout();
-		panel.setBounds(428, 87, 128, 34);
-		add(panel);
-
-		JSpinner spinnerHora = new JSpinner();
-		spinnerHora.setVisible(false);
-		spinnerHora.setModel(new SpinnerNumberModel(15, 14, 23, 1));
-		panel.add(spinnerHora);
-
-		JLabel lblDosPuntos = new JLabel(":");
-		lblDosPuntos.setVisible(false);
-		panel.add(lblDosPuntos);
-
-		JSpinner spinnerMinutos = new JSpinner();
-		spinnerMinutos.setVisible(false);
-		spinnerMinutos.setModel(new SpinnerNumberModel(0, -1, 60, 1));
-		panel.add(spinnerMinutos);
 
 		Label labelFecha = new Label("Fecha");
 		labelFecha.setVisible(false);
 		labelFecha.setBounds(297, 59, 62, 22);
 		add(labelFecha);
-
-		Label labelHora = new Label("Hora");
-		labelHora.setVisible(false);
-		labelHora.setBounds(467, 59, 62, 22);
-		add(labelHora);
-
-		spinnerHora.addChangeListener(new ChangeListener() {
-			public void stateChanged(ChangeEvent e) {
-				int z = (int) spinnerHora.getValue();
-				if (z == 23) {
-					spinnerHora.setValue(15);
-				}
-				if (z == 14) {
-					spinnerHora.setValue(22);
-				}
-			}
-		});
-
-		spinnerMinutos.addChangeListener(new ChangeListener() {
-			public void stateChanged(ChangeEvent e) {
-				int z = (int) spinnerMinutos.getValue();
-				if (z == 60) {
-					spinnerMinutos.setValue(0);
-				}
-				if (z == -1) {
-					spinnerMinutos.setValue(59);
-				}
+		
+		JComboBox comboBoxSesion = new JComboBox();
+		comboBoxSesion.setVisible(false);
+		comboBoxSesion.setBounds(353, 238, 120, 22);
+		add(comboBoxSesion);
+		
+		JLabel lblAviso = new JLabel("Hora no activa");
+		lblAviso.setForeground(Color.RED);
+		lblAviso.setBounds(450, 67, 101, 14);
+		add(lblAviso);
+		
+		JButton btnNoAsientos = new JButton("Seguir");
+		btnNoAsientos.setBounds(479, 410, 89, 23);
+		add(btnNoAsientos);
+		
+		JComboBox comboBox = new JComboBox();
+		comboBox.setBounds(440, 87, 95, 22);
+		add(comboBox);
+		
+		btnNoAsientos.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				v.cambiarPanel(4);
+				v.setVisible(true);
+				
 			}
 		});
 
@@ -195,13 +164,15 @@ public class SelectPelicula extends JPanel {
 				} else {
 					String str = sdf.format(dateChooser.getDate());
 					Date date = Date.valueOf(str);
-					System.out.println(date);
-					int z = (int) spinnerMinutos.getValue();
-					int b = (int) spinnerHora.getValue();
+					String idioma = (String) comboBoxIdioma.getSelectedItem();
+					//Falta Hora
 					
 					int numP = (int) comboBoxPelicula.getSelectedIndex();
-					pelisSql.sesion(numP, date , z , b);
-					System.out.println(pelisSql.sesion(numP, date , ABORT, numP));
+					
+					String a = pelisSql.sesion(numP, date, idioma);
+					comboBoxSesion.setVisible(true);
+					comboBoxSesion.setModel(new DefaultComboBoxModel(new String[] {a}));
+					
 				}
 			}
 		});
@@ -235,10 +206,8 @@ public class SelectPelicula extends JPanel {
 			public void popupMenuWillBecomeInvisible(PopupMenuEvent e) {
 				labelFecha.setVisible(true);
 				dateChooser.setVisible(true);
-				labelHora.setVisible(true);
-				spinnerHora.setVisible(true);
-				spinnerMinutos.setVisible(true);
-				lblDosPuntos.setVisible(true);
+
+
 				buttonFechHora.setVisible(true);
 				repaint();
 			}
