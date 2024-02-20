@@ -55,6 +55,12 @@ public class Sesion {
 
 
 
+	public Sesion() {
+		// TODO Auto-generated constructor stub
+	}
+
+
+
 	public int getIdPelicula() {
 		return idPelicula;
 	}

@@ -71,10 +71,6 @@ public class SelectPelicula extends JPanel {
 		btnLogOut.setBounds(440, 11, 128, 23);
 		add(btnLogOut);
 
-		JComboBox comboBoxCine = new JComboBox();
-		comboBoxCine.setBounds(353, 305, 120, 22);
-		add(comboBoxCine);
-
 		JEditorPane dtrpnCartelera = new JEditorPane();
 		dtrpnCartelera.setVisible(false);
 		dtrpnCartelera.setText("cartelera");
@@ -126,10 +122,10 @@ public class SelectPelicula extends JPanel {
 		labelFecha.setBounds(297, 59, 62, 22);
 		add(labelFecha);
 		
-		JComboBox comboBoxSesion = new JComboBox();
-		comboBoxSesion.setVisible(false);
-		comboBoxSesion.setBounds(353, 238, 120, 22);
-		add(comboBoxSesion);
+		JComboBox comboBoxSesionCine = new JComboBox();
+		comboBoxSesionCine.setVisible(false);
+		comboBoxSesionCine.setBounds(354, 238, 136, 22);
+		add(comboBoxSesionCine);
 		
 		JLabel lblAviso = new JLabel("Hora no activa");
 		lblAviso.setForeground(Color.RED);
@@ -147,8 +143,15 @@ public class SelectPelicula extends JPanel {
 		btnNoAsientos.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				v.cambiarPanel(4);
-				v.setVisible(true);
+				if (comboBoxSesionCine.getSelectedItem() != null) {
+					v.cambiarPanel(4);
+					v.setVisible(true);
+				} else {
+					String a = "Complete todos los campos";
+					Error error = new Error();
+					error.error(a);
+				}
+				
 				
 			}
 		});
@@ -170,8 +173,8 @@ public class SelectPelicula extends JPanel {
 					int numP = (int) comboBoxPelicula.getSelectedIndex();
 					
 					String a = pelisSql.sesion(numP, date, idioma);
-					comboBoxSesion.setVisible(true);
-					comboBoxSesion.setModel(new DefaultComboBoxModel(new String[] {a}));
+					comboBoxSesionCine.setVisible(true);
+					comboBoxSesionCine.setModel(new DefaultComboBoxModel(new String[] {a}));
 					
 				}
 			}
@@ -250,6 +253,7 @@ public class SelectPelicula extends JPanel {
 				v.setVisible(true);
 			}
 		});
+		
 
 	}
 }

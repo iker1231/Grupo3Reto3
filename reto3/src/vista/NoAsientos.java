@@ -27,8 +27,14 @@ import java.awt.event.MouseEvent;
 import vista.Error;
 import modelo.Cliente;
 import sql.ClientesSql;
+import sql.NoAsientosSQL;
+
 import javax.swing.JSpinner;
 import javax.swing.SpinnerNumberModel;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import javax.swing.event.ChangeListener;
+import javax.swing.event.ChangeEvent;
 
 public class NoAsientos extends JPanel {
 	/**
@@ -40,6 +46,7 @@ public class NoAsientos extends JPanel {
 	private JTable table;
 
 	public NoAsientos(GestorVentanas v) {
+		NoAsientosSQL asientos = new NoAsientosSQL();
 		ClientesSql clientesSql = new ClientesSql();
 		setLayout(null);
 
@@ -73,8 +80,8 @@ public class NoAsientos extends JPanel {
 		add(table);
 		
 		JSpinner spinner = new JSpinner();
-		spinner.setModel(new SpinnerNumberModel(Integer.valueOf(0), Integer.valueOf(0), null, Integer.valueOf(1)));
-		spinner.setBounds(83, 79, 30, 20);
+		spinner.setModel(new SpinnerNumberModel(0, 0, 10, 1));
+		spinner.setBounds(84, 79, 30, 20);
 		add(spinner);
 		
 		JLabel lblPrecioFinal = new JLabel("Precio Final:");
@@ -82,9 +89,9 @@ public class NoAsientos extends JPanel {
 		lblPrecioFinal.setBounds(20, 302, 79, 14);
 		add(lblPrecioFinal);
 		
-		JLabel lblShowPrecio = new JLabel("x€");
+		JLabel lblShowPrecio = new JLabel("0€");
 		lblShowPrecio.setHorizontalAlignment(SwingConstants.LEFT);
-		lblShowPrecio.setBounds(109, 302, 46, 14);
+		lblShowPrecio.setBounds(109, 302, 22, 14);
 		add(lblShowPrecio);
 		
 		JLabel lblPrecioEntrada = new JLabel("Precio Entrada:");
@@ -92,14 +99,37 @@ public class NoAsientos extends JPanel {
 		lblPrecioEntrada.setBounds(20, 279, 79, 14);
 		add(lblPrecioEntrada);
 		
-		JLabel lblShowPrecioEtrada = new JLabel("x€");
+		JLabel lblShowPrecioEtrada = new JLabel("0€");
 		lblShowPrecioEtrada.setHorizontalAlignment(SwingConstants.LEFT);
 		lblShowPrecioEtrada.setBounds(109, 279, 46, 14);
 		add(lblShowPrecioEtrada);
 		
 		JLabel lblDescuento = new JLabel("-X%");
-		lblDescuento.setBounds(131, 302, 46, 14);
+		lblDescuento.setBounds(141, 302, 46, 14);
 		add(lblDescuento);
+		
+		spinner.addChangeListener(new ChangeListener() {
+			public void stateChanged(ChangeEvent e) {
+				int a = 0;
+				float porcent = 0;
+				
+				lblShowPrecioEtrada.setText(Float.toString(asientos.precio()) + "€");
+				lblShowPrecio.setText(Float.toString(asientos.precio()) + "€");
+				if (!spinner.getValue().toString().equals("1")) {
+					if ((int) spinner.getValue() <= 5) {
+						porcent =  Integer.parseInt(spinner.getValue().toString()) *10;
+					} else {
+						porcent = 50;
+					}
+					a = (int) ((asientos.precio()*Integer.parseInt(spinner.getValue().toString())) - porcent/100 * (asientos.precio()*Integer.parseInt(spinner.getValue().toString())));
+					lblShowPrecio.setText(Integer.toString(a) + "€");
+					lblDescuento.setText(Float.toString(porcent) + "%");
+					
+				}
+			}
+		});
+		
+		
 		btnExit.addMouseListener(new MouseAdapter() {
 			/**
 			 * Se llama cuando se hace clic en el botón "Salir". Cierra la aplicación al
@@ -122,7 +152,7 @@ public class NoAsientos extends JPanel {
 		btnAtras.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				v.cambiarPanel(0);
+				v.cambiarPanel(3);
 				v.setVisible(true);
 			}
 		});

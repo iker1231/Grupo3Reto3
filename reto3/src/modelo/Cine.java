@@ -29,6 +29,10 @@ public class Cine {
 		this.nombreCine = nombreCine;
 	}
 
+	public Cine() {
+		// TODO Auto-generated constructor stub
+	}
+
 	/**
 	 * @return the idCine
 	 */
