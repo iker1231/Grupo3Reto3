@@ -62,7 +62,8 @@ public class ResumenFactura extends JPanel {
 			public void mouseClicked(MouseEvent e) {
 				int ventanaYesNot = JOptionPane.showConfirmDialog(null, "¿Seguro que desea salir?", v.getTitle(),
 						JOptionPane.YES_NO_OPTION);
-				// 0=yes, 1=no, 2=cancel
+				// 0=yes, 1=no, 2=cancel   
+				//alfa
 				if (ventanaYesNot == 0) {
 					System.exit(0);
 				} else if (ventanaYesNot == 1) {
