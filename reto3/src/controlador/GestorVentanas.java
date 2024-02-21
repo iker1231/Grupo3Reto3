@@ -11,6 +11,7 @@ import vista.Welcome;
 import vista.Login;
 import vista.CrearUsuario;
 import vista.NoAsientos;
+import vista.ResumenFactura;
 
 public class GestorVentanas extends JFrame{
 	
@@ -47,11 +48,10 @@ public class GestorVentanas extends JFrame{
 		case 4:
 			setContentPane(new NoAsientos(this));
 			break;
-			/*
-		case 9:
-			setContentPane(new Prueba(this));
+
+		case 5:
+			setContentPane(new ResumenFactura(this));
 			break;
-			*/
 		}
 	}
 	/**

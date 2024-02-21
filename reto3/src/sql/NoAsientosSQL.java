@@ -17,7 +17,7 @@ import vista.SelectPelicula;
 import sql.SelectPeliSql;
 
 public class NoAsientosSQL {
-	public static int sesionId = 4;
+	public static int sesionId = 0;
 	
 	public float precio() {
 		Connection connection = null;
@@ -29,10 +29,8 @@ public class NoAsientosSQL {
 		Cine cine = new Cine();
 		cineId = cine.getIdCine();
 		float precio = 0;
-		System.out.println(sesionId);
 		try {
 			connection = DriverManager.getConnection("jdbc:mysql://localhost/reto3_grupo3", "grupo3", "Grupo_Tres_3");
-
 			statement = connection.createStatement();
 
 			String sql = "SELECT Precio FROM sesion WHERE IdSesion = '" + sesionId  +"'";

@@ -81,36 +81,47 @@ public class NoAsientos extends JPanel {
 		
 		JSpinner spinner = new JSpinner();
 		spinner.setModel(new SpinnerNumberModel(0, 0, 10, 1));
-		spinner.setBounds(84, 79, 30, 20);
+		spinner.setBounds(75, 79, 39, 20);
 		add(spinner);
 		
 		JLabel lblPrecioFinal = new JLabel("Precio Final:");
 		lblPrecioFinal.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblPrecioFinal.setBounds(20, 302, 79, 14);
+		lblPrecioFinal.setBounds(0, 302, 94, 14);
 		add(lblPrecioFinal);
 		
 		JLabel lblShowPrecio = new JLabel("0€");
 		lblShowPrecio.setHorizontalAlignment(SwingConstants.LEFT);
-		lblShowPrecio.setBounds(109, 302, 22, 14);
+		lblShowPrecio.setBounds(104, 302, 46, 14);
 		add(lblShowPrecio);
 		
 		JLabel lblPrecioEntrada = new JLabel("Precio Entrada:");
 		lblPrecioEntrada.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblPrecioEntrada.setBounds(20, 279, 79, 14);
+		lblPrecioEntrada.setBounds(0, 277, 94, 14);
 		add(lblPrecioEntrada);
 		
 		JLabel lblShowPrecioEtrada = new JLabel("0€");
 		lblShowPrecioEtrada.setHorizontalAlignment(SwingConstants.LEFT);
-		lblShowPrecioEtrada.setBounds(109, 279, 46, 14);
+		lblShowPrecioEtrada.setBounds(104, 277, 46, 14);
 		add(lblShowPrecioEtrada);
 		
 		JLabel lblDescuento = new JLabel("-X%");
-		lblDescuento.setBounds(141, 302, 46, 14);
+		lblDescuento.setBounds(149, 302, 46, 14);
 		add(lblDescuento);
+		
+		JButton btnContinuar = new JButton("siguiente");
+		btnContinuar.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				v.cambiarPanel(5);
+				v.setVisible(true);
+			}
+		});
+		btnContinuar.setBounds(479, 411, 89, 23);
+		add(btnContinuar);
 		
 		spinner.addChangeListener(new ChangeListener() {
 			public void stateChanged(ChangeEvent e) {
-				int a = 0;
+				float a = 0;
 				float porcent = 0;
 				
 				lblShowPrecioEtrada.setText(Float.toString(asientos.precio()) + "€");
@@ -121,8 +132,8 @@ public class NoAsientos extends JPanel {
 					} else {
 						porcent = 50;
 					}
-					a = (int) ((asientos.precio()*Integer.parseInt(spinner.getValue().toString())) - porcent/100 * (asientos.precio()*Integer.parseInt(spinner.getValue().toString())));
-					lblShowPrecio.setText(Integer.toString(a) + "€");
+					a = ((asientos.precio()*Integer.parseInt(spinner.getValue().toString())) - porcent/100 * (asientos.precio()*Integer.parseInt(spinner.getValue().toString())));
+					lblShowPrecio.setText(Float.toString(a) + "€");
 					lblDescuento.setText(Float.toString(porcent) + "%");
 					
 				}
@@ -159,9 +170,9 @@ public class NoAsientos extends JPanel {
 		btnLogOut.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				String a = "No hay sesión iniciada";
-				Error error = new Error();
-				error.error(a);
+				JOptionPane.showMessageDialog(null, "Sesion cerrada");
+				v.cambiarPanel(1);
+				v.setVisible(true);
 			}
 		});
 

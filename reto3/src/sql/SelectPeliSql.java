@@ -7,7 +7,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Iterator;
 
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 
 import modelo.Cine;
@@ -19,14 +21,14 @@ import vista.SelectPelicula;
 public class SelectPeliSql {
 	private int sesionId;
 	private int cineId;
-	
+
 	public String[] nombrePelicula() {
 		Connection connection = null;
 		ResultSet rs = null;
 		Statement statement = null;
-		String[] pelis = { "", "", "", "", "", "", "", "" };
+		String[] pelis = { " ", "", "", "", "", "", "", "", "" };
 
-		int i = 0;
+		int i = 1;
 
 		try {
 			connection = DriverManager.getConnection("jdbc:mysql://localhost/reto3_grupo3", "grupo3", "Grupo_Tres_3");
@@ -63,25 +65,26 @@ public class SelectPeliSql {
 		return pelis;
 	}
 
-	public String[] idiomPeli(int NumP) {
+	public ArrayList<String> idiomPeli(int NumP) {
 		Connection connection = null;
 		ResultSet rs = null;
 		Statement statement = null;
-		String[] idiom = { "", "", "", "" };
-		int i = 0;
+		ArrayList<String> idiom = new ArrayList<String>();
+		idiom.add(" ");
+		int i = 1;
 
 		try {
 			connection = DriverManager.getConnection("jdbc:mysql://localhost/reto3_grupo3", "grupo3", "Grupo_Tres_3");
 			statement = connection.createStatement();
 
 			darpeli(NumP);
-			NumP++;
+			//NumP++;
 			String sql1 = "select Idioma from sesion where IdPelicula ='" + NumP + "'";
 			rs = statement.executeQuery(sql1);
 
-			while ((i <= 4) && (rs.next())) {
+			while ((rs.next())) {
 				String all = rs.getString("Idioma");
-				idiom[i] = all;
+				idiom.add(all);
 				i = i + 1;
 			}
 
@@ -111,6 +114,7 @@ public class SelectPeliSql {
 		ResultSet rs2 = null;
 		Statement statement = null;
 		String[] idiom = { "", "", "" };
+		SelectPelicula select = new SelectPelicula(null);
 
 		try {
 			connection = DriverManager.getConnection("jdbc:mysql://localhost/reto3_grupo3", "grupo3", "Grupo_Tres_3");
@@ -126,6 +130,7 @@ public class SelectPeliSql {
 			p.setTitulo(rs2.getString("Titulo"));
 			p.setDuracion(rs2.getString("Duracion"));
 			p.setGeneroPe(rs2.getString("GeneroPe"));
+			select.genero = rs2.getString("GeneroPe");
 
 		} catch (SQLException sqle) {
 			JOptionPane.showMessageDialog(null, "ERROR, Vuelve a intentarlo4");
@@ -148,41 +153,72 @@ public class SelectPeliSql {
 		return idiom;
 	}
 
-	public String sesion(int NumP, Date date, String idioma) {
-		 NoAsientosSQL asientos = new NoAsientosSQL();
+	public ArrayList<String> sesion(int NumP, Date date, String idioma) {
+		NoAsientosSQL asientos = new NoAsientosSQL();
 		Connection connection = null;
 		ResultSet rs = null;
 		Statement statement = null;
-		String a = null;
-		String b = null;
-
+		ArrayList<String> horarioCine = new ArrayList<String>();
+		ArrayList<String> a = new ArrayList<String>();
+		ArrayList<String> b = new ArrayList<String>();
+		ArrayList<String> c = new ArrayList<String>();
 		int i = 0;
 
 		try {
+			
 			connection = DriverManager.getConnection("jdbc:mysql://localhost/reto3_grupo3", "grupo3", "Grupo_Tres_3");
 			statement = connection.createStatement();
+			//NumP++;
+			/*
 			String sql = "select Horario, IdSesion from sesion where IdPelicula ='" + NumP + "' and FechaSesion='"
 					+ date + "'";
 			rs = statement.executeQuery(sql);
-			rs.next();
-			String all = rs.getString("Horario");
-			sesionId = rs.getInt("IdSesion");
-			asientos.sesionId = NumP;
-			a = all;
+
+			while ((i <= 3) && (rs.next())) {
+				String all = rs.getString("Horario");
+				sesionId = rs.getInt("IdSesion");
+				asientos.sesionId = NumP;
+				a.add(all);
+				i++;
+			}
+			*/
+			String sql = "SELECT NombreCine, sa.NombreSala, ci.IdCine, se.IdSesion from cine ci JOIN sala sa on sa.IdCine=ci.IdCine join sesion se on se.IdSala=sa.IdSala WHERE se.IdSesion ='"
+					+ sesionId + "'";
+			rs = statement.executeQuery(sql);
+
+			while ((i <= 3) && (rs.next())) {
+				String all = rs.getString("NombreSala");
+				sesionId = rs.getInt("IdSesion");
+				asientos.sesionId = NumP;
+				a.add(all);
+				i++;
+			}
+			
 			String sql1 = "SELECT NombreCine, ci.IdCine, se.IdSesion from cine ci JOIN sala sa on sa.IdCine=ci.IdCine join sesion se on se.IdSala=sa.IdSala WHERE se.IdSesion ='"
 					+ sesionId + "'";
-			rs = statement.executeQuery(sql1);
-			rs.next();
-			String all1 = rs.getString("NombreCine");
-			int all2 = rs.getInt("IdCine");
-			b = all1;
-			cineId = all2;
+			ResultSet rs1 = statement.executeQuery(sql1);
+			i = 0;
+
+			while (i <= 3) {
+				if (rs1.next()) {
+					String all1 = rs1.getString("NombreCine");
+					int all2 = rs1.getInt("IdCine");
+					cineId = all2;
+					b.add(all1);
+					i++;
+				} else if (!rs1.next()) {
+					String alfa = b.get(0).toString();
+					b.add(alfa);
+
+					i++;
+				}
+			}
+
 			Cine cine = new Cine();
 			cine.setIdCine(cineId);
 
-			while ((rs.next())) {
-
-				i = i + 1;
+			for (int j = 0; j < a.size(); j++) {
+				horarioCine.add(a.get(j) + " | " + b.get(j));
 			}
 
 		} catch (SQLException sqle) {
@@ -203,6 +239,6 @@ public class SelectPeliSql {
 			}
 			;
 		}
-		return a + " | " + b;
+		return horarioCine;
 	}
 }

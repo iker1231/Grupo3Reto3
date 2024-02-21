@@ -12,9 +12,9 @@ import modelo.Cliente;
 
 public class ClientesSql {
 
-	public void insertarCliente(Cliente cliente) {
+	public int insertarCliente(Cliente cliente) {
 		Connection connection = null;
-
+		int a = 0;
 		Statement statement = null;
 
 		try {
@@ -27,7 +27,8 @@ public class ClientesSql {
 					+ cliente.getGeneroCli() + "','" + cliente.getContrasena() + "')";
 
 			statement.executeUpdate(sql);
-
+			JOptionPane.showMessageDialog(null, "Usuario creado");
+			a = 1;
 		} catch (SQLException sqle) {
 			JOptionPane.showMessageDialog(null, "ERROR, Vuelve a intentarlo");
 		} catch (Exception e) {
@@ -36,7 +37,6 @@ public class ClientesSql {
 			try {
 				if (statement != null)
 					statement.close();
-				JOptionPane.showMessageDialog(null, "Cliente creado");
 			} catch (Exception e) {
 			}
 			;
@@ -47,6 +47,7 @@ public class ClientesSql {
 			}
 			;
 		}
+		return a;
 	}
 
 	public boolean validarLogin(String Dni, String Contrasena) {

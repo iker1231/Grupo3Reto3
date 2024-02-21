@@ -64,12 +64,12 @@ public class CrearUsuario extends JPanel {
 		add(btnExit);
 
 		JButton btnAtras = new JButton("Atras/Cancelar");
-		btnAtras.setBounds(10, 266, 140, 23);
+		btnAtras.setBounds(10, 391, 140, 23);
 		add(btnAtras);
 
 		JButton btnCrear = new JButton("Crear");
 
-		btnCrear.setBounds(351, 266, 89, 23);
+		btnCrear.setBounds(481, 403, 89, 23);
 		add(btnCrear);
 
 		JLabel lblDNI = new JLabel("DNI");
@@ -206,10 +206,20 @@ public class CrearUsuario extends JPanel {
 						cliente.setNombreCli(textFieldNombre.getText());
 						cliente.setApellidoCli(textFieldApellidos.getText());
 						cliente.setGeneroCli((String) comboBoxGenero.getSelectedItem());
-						//dni largo mensaje de creado
-						clientesSql.insertarCliente(cliente);
-						v.cambiarPanel(1);
-						v.setVisible(true);
+						// dni largo mensaje de creado
+						if (clientesSql.insertarCliente(cliente) == 1) {
+							v.cambiarPanel(1);
+							v.setVisible(true);
+						} else {
+							textFieldDNI.setText("");
+							passwordFieldPassword1.setText("");
+							textFieldNombre.setText("");
+							textFieldApellidos.setText("");
+							passwordFieldPassword2.setText("");
+							passwordFieldPassword1.setBackground(new Color(255, 153, 153));
+							passwordFieldPassword2.setBackground(new Color(255, 153, 153));
+							repaint();
+						}
 					}
 				}
 			}

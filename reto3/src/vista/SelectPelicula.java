@@ -7,7 +7,6 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.text.SimpleDateFormat;
 import java.util.*;
-import java.util.Locale;
 import java.sql.Date;
 
 import javax.swing.DefaultComboBoxModel;
@@ -43,6 +42,7 @@ import javax.swing.event.ChangeListener;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.PopupMenuListener;
 import javax.swing.event.PopupMenuEvent;
+import javax.swing.SwingConstants;
 
 public class SelectPelicula extends JPanel {
 	/**
@@ -52,7 +52,7 @@ public class SelectPelicula extends JPanel {
 	private JTextField textField;
 	private JPasswordField passwordField;
 	
-
+	public static String genero = "";
 	public SelectPelicula(GestorVentanas v) {
 		ClientesSql clientesSql = new ClientesSql();
 		Pelicula p = new Pelicula();
@@ -100,8 +100,9 @@ public class SelectPelicula extends JPanel {
 		add(comboBoxIdioma);
 
 		JLabel lblGenero = new JLabel("genero");
+		lblGenero.setHorizontalAlignment(SwingConstants.LEFT);
 		lblGenero.setVisible(false);
-		lblGenero.setBounds(132, 117, 46, 14);
+		lblGenero.setBounds(132, 117, 127, 14);
 		add(lblGenero);
 
 		JDateChooser dateChooser = new JDateChooser();
@@ -172,9 +173,14 @@ public class SelectPelicula extends JPanel {
 					
 					int numP = (int) comboBoxPelicula.getSelectedIndex();
 					
-					String a = pelisSql.sesion(numP, date, idioma);
+					ArrayList<String> a = pelisSql.sesion(numP, date, idioma);
 					comboBoxSesionCine.setVisible(true);
-					comboBoxSesionCine.setModel(new DefaultComboBoxModel(new String[] {a}));
+					String[] b = {"","",""}; 
+					for (int i = 0; i < a.size(); i++) {
+						
+						b[i] = a.get(i);
+					}
+					comboBoxSesionCine.setModel(new DefaultComboBoxModel(new String[] {b[0], b[1], b[2]}));
 					
 				}
 			}
@@ -187,14 +193,14 @@ public class SelectPelicula extends JPanel {
 				lblGenero.setVisible(true);
 				txtpnSinopsis.setVisible(true);
 				int numP = (int) comboBoxPelicula.getSelectedIndex();
-				String[] idiom = pelisSql.idiomPeli(numP);
+				ArrayList<String> idiom = pelisSql.idiomPeli(numP);
 				comboBoxIdioma.removeAllItems();
-				for (int i = 0; i < idiom.length; i++) {
-					comboBoxIdioma.addItem(idiom[i]);
+				for (int i = 0; i < idiom.size(); i++) {
+					comboBoxIdioma.addItem(idiom.get(i));
 				}
 				// genero no funciona, el dato almacenado en pelicula no sale con el get, se
 				// envian los datos desde el sql pelis
-				lblGenero.setText(p.getGeneroPe());
+				lblGenero.setText(genero);
 				lblGenero.repaint();
 				repaint();
 			}
@@ -256,4 +262,7 @@ public class SelectPelicula extends JPanel {
 		
 
 	}
+
+
+	
 }
