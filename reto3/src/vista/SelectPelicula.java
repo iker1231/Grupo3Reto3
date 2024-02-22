@@ -128,18 +128,20 @@ public class SelectPelicula extends JPanel {
 		comboBoxSesionCine.setBounds(354, 238, 136, 22);
 		add(comboBoxSesionCine);
 		
-		JLabel lblAviso = new JLabel("Hora no activa");
-		lblAviso.setForeground(Color.RED);
-		lblAviso.setBounds(450, 67, 101, 14);
-		add(lblAviso);
+		JLabel lblHora = new JLabel("Hora");
+		lblHora.setVisible(false);
+		lblHora.setForeground(new Color(0, 0, 0));
+		lblHora.setBounds(450, 67, 101, 14);
+		add(lblHora);
 		
 		JButton btnNoAsientos = new JButton("Seguir");
 		btnNoAsientos.setBounds(479, 410, 89, 23);
 		add(btnNoAsientos);
 		
-		JComboBox comboBox = new JComboBox();
-		comboBox.setBounds(440, 87, 95, 22);
-		add(comboBox);
+		JComboBox comboBoxHora = new JComboBox();
+		comboBoxHora.setVisible(false);
+		comboBoxHora.setBounds(440, 87, 95, 22);
+		add(comboBoxHora);
 		
 		btnNoAsientos.addMouseListener(new MouseAdapter() {
 			@Override
@@ -168,12 +170,12 @@ public class SelectPelicula extends JPanel {
 				} else {
 					String str = sdf.format(dateChooser.getDate());
 					Date date = Date.valueOf(str);
-					String idioma = (String) comboBoxIdioma.getSelectedItem();
+					String hora = (String) comboBoxHora.getSelectedItem();
 					//Falta Hora
 					
 					int numP = (int) comboBoxPelicula.getSelectedIndex();
 					
-					ArrayList<String> a = pelisSql.sesion(numP, date, idioma);
+					ArrayList<String> a = pelisSql.sesion(numP, date, hora);
 					comboBoxSesionCine.setVisible(true);
 					String[] b = {"","",""}; 
 					for (int i = 0; i < a.size(); i++) {
@@ -215,10 +217,14 @@ public class SelectPelicula extends JPanel {
 			public void popupMenuWillBecomeInvisible(PopupMenuEvent e) {
 				labelFecha.setVisible(true);
 				dateChooser.setVisible(true);
-
-
 				buttonFechHora.setVisible(true);
-				repaint();
+				comboBoxHora.setVisible(true);
+				lblHora.setVisible(true);
+				ArrayList<String> a =pelisSql.horario(comboBoxPelicula.getSelectedIndex(), comboBoxIdioma.getSelectedItem().toString());
+				for (int i = 0; i < a.size(); i++) {
+					comboBoxHora.addItem(a.get(i));
+				}
+				comboBoxHora.repaint();
 			}
 
 			public void popupMenuWillBecomeVisible(PopupMenuEvent e) {

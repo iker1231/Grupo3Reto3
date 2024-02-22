@@ -78,8 +78,8 @@ public class SelectPeliSql {
 			statement = connection.createStatement();
 
 			darpeli(NumP);
-			//NumP++;
-			String sql1 = "select Idioma from sesion where IdPelicula ='" + NumP + "'";
+			// NumP++;
+			String sql1 = "select Idioma from sesion where IdPelicula ='" + NumP + "' group by Idioma";
 			rs = statement.executeQuery(sql1);
 
 			while ((rs.next())) {
@@ -121,7 +121,7 @@ public class SelectPeliSql {
 
 			statement = connection.createStatement();
 			NumP++;
-			String sql2 = "select * from pelicula where IdPelicula ='" + NumP + "'";
+			String sql2 = "select * from pelicula where IdPelicula ='" + NumP + "' ";
 			rs2 = statement.executeQuery(sql2);
 			Pelicula p = new Pelicula();
 			rs2.next();
@@ -153,11 +153,12 @@ public class SelectPeliSql {
 		return idiom;
 	}
 
-	public ArrayList<String> sesion(int NumP, Date date, String idioma) {
+	public ArrayList<String> sesion(int NumP, Date date, String hora) {
 		NoAsientosSQL asientos = new NoAsientosSQL();
 		Connection connection = null;
 		ResultSet rs = null;
 		Statement statement = null;
+		String all;
 		ArrayList<String> horarioCine = new ArrayList<String>();
 		ArrayList<String> a = new ArrayList<String>();
 		ArrayList<String> b = new ArrayList<String>();
@@ -165,35 +166,37 @@ public class SelectPeliSql {
 		int i = 0;
 
 		try {
-			
+
 			connection = DriverManager.getConnection("jdbc:mysql://localhost/reto3_grupo3", "grupo3", "Grupo_Tres_3");
 			statement = connection.createStatement();
-			//NumP++;
+			// NumP++;
 			/*
-			String sql = "select Horario, IdSesion from sesion where IdPelicula ='" + NumP + "' and FechaSesion='"
-					+ date + "'";
+			 * String sql = "select IdSesion from sesion where IdPelicula ='" + NumP +
+			 * "' and FechaSesion='" + date + "'"; rs = statement.executeQuery(sql);
+			 * 
+			 * while ((i <= 3) && (rs.next())) { String all = rs.getString("Horario");
+			 * sesionId = rs.getInt("IdSesion"); asientos.sesionId = NumP; a.add(all); i++;
+			 * }
+			 */
+			String sql = "SELECT NombreCine, sa.NombreSala, ci.IdCine, se.IdSesion\r\n"
+					+ "from cine ci \r\n"
+					+ "JOIN sala sa on sa.IdCine=ci.IdCine join sesion se on se.IdSala=sa.IdSala \r\n"
+					+ "WHERE se.IdPelicula = '" + NumP + "' and se.FechaSesion = '"+date+"' and se.Horario = '"+ hora+"'";
 			rs = statement.executeQuery(sql);
 
 			while ((i <= 3) && (rs.next())) {
-				String all = rs.getString("Horario");
+				all = rs.getString("NombreSala");
+				a.add(all);
+				all = rs.getString("NombreCine");
+				b.add(all);
 				sesionId = rs.getInt("IdSesion");
 				asientos.sesionId = NumP;
-				a.add(all);
+				int all1 = rs.getInt("IdCine");
+				cineId = all1;
+				
 				i++;
 			}
-			*/
-			String sql = "SELECT NombreCine, sa.NombreSala, ci.IdCine, se.IdSesion from cine ci JOIN sala sa on sa.IdCine=ci.IdCine join sesion se on se.IdSala=sa.IdSala WHERE se.IdSesion ='"
-					+ sesionId + "'";
-			rs = statement.executeQuery(sql);
-
-			while ((i <= 3) && (rs.next())) {
-				String all = rs.getString("NombreSala");
-				sesionId = rs.getInt("IdSesion");
-				asientos.sesionId = NumP;
-				a.add(all);
-				i++;
-			}
-			
+			/*
 			String sql1 = "SELECT NombreCine, ci.IdCine, se.IdSesion from cine ci JOIN sala sa on sa.IdCine=ci.IdCine join sesion se on se.IdSala=sa.IdSala WHERE se.IdSesion ='"
 					+ sesionId + "'";
 			ResultSet rs1 = statement.executeQuery(sql1);
@@ -213,7 +216,7 @@ public class SelectPeliSql {
 					i++;
 				}
 			}
-
+			*/
 			Cine cine = new Cine();
 			cine.setIdCine(cineId);
 
@@ -240,5 +243,49 @@ public class SelectPeliSql {
 			;
 		}
 		return horarioCine;
+	}
+
+	public ArrayList<String> horario(int NumP, String idioma) {
+		Connection connection = null;
+		ResultSet rs = null;
+		Statement statement = null;
+		ArrayList<String> horas = new ArrayList<String>();
+
+		int i = 1;
+
+		try {
+			connection = DriverManager.getConnection("jdbc:mysql://localhost/reto3_grupo3", "grupo3", "Grupo_Tres_3");
+
+			statement = connection.createStatement();
+
+			String sql = "SELECT DISTINCT Horario FROM `sesion` WHERE IdPelicula='" + NumP + "'and Idioma = '" + idioma
+					+ "' ";
+			rs = statement.executeQuery(sql);
+			while (rs.next()) {
+				String all = rs.getString("Horario");
+				horas.add(all);
+				i = i + 1;
+
+			}
+
+		} catch (SQLException sqle) {
+			JOptionPane.showMessageDialog(null, "ERROR, Vuelve a intentarlo");
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(null, "ERROR, Vuelve a intentarlo 1");
+		} finally {
+			try {
+				if (statement != null)
+					statement.close();
+			} catch (Exception e) {
+			}
+			;
+			try {
+				if (connection != null)
+					connection.close();
+			} catch (Exception e) {
+			}
+			;
+		}
+		return horas;
 	}
 }
