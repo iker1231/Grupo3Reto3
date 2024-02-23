@@ -52,7 +52,6 @@ public class SelectPelicula extends JPanel {
 	private JTextField textField;
 	private JPasswordField passwordField;
 	
-	public static String genero = "";
 	public SelectPelicula(GestorVentanas v) {
 		ClientesSql clientesSql = new ClientesSql();
 		Pelicula p = new Pelicula();
@@ -149,6 +148,9 @@ public class SelectPelicula extends JPanel {
 				if (comboBoxSesionCine.getSelectedItem() != null) {
 					v.cambiarPanel(4);
 					v.setVisible(true);
+					Pelicula pelicula = new Pelicula();
+					
+					
 				} else {
 					String a = "Complete todos los campos";
 					Error error = new Error();
@@ -202,7 +204,8 @@ public class SelectPelicula extends JPanel {
 				}
 				// genero no funciona, el dato almacenado en pelicula no sale con el get, se
 				// envian los datos desde el sql pelis
-				lblGenero.setText(genero);
+				Pelicula pelicula = new Pelicula();
+				lblGenero.setText(pelicula.getGeneroPe());
 				lblGenero.repaint();
 				repaint();
 			}

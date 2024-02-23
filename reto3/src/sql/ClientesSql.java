@@ -56,7 +56,7 @@ public class ClientesSql {
 
 		Connection connection = null;
 		Statement statement = null;
-		ResultSet resultSet = null;
+		ResultSet rs = null;
 
 		try {
 			connection = DriverManager.getConnection("jdbc:mysql://localhost/reto3_grupo3", "grupo3", "Grupo_Tres_3");
@@ -65,10 +65,12 @@ public class ClientesSql {
 
 			String sql = "select * from cliente where DNI = '" + Dni + "' and Contraseña = '" + Contrasena
 					+ "'";
-			resultSet = statement.executeQuery(sql);
+			rs = statement.executeQuery(sql);
 
-			if (resultSet.next()) {
+			if (rs.next()) {
 				ret = true;
+				Cliente cliente = new Cliente();
+				cliente.setDni(Dni);
 			} else {
 				JOptionPane.showMessageDialog(null, "DNI y/o contraseña incorrectos");
 			}
@@ -80,8 +82,8 @@ public class ClientesSql {
 		} finally {
 
 			try {
-				if (resultSet != null)
-					resultSet.close();
+				if (rs != null)
+					rs.close();
 			} catch (Exception e) {
 			}
 			;

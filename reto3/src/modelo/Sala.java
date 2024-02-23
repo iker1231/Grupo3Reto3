@@ -22,9 +22,9 @@ public class Sala {
 		return idCine == other.idCine && idSala == other.idSala && Objects.equals(nombreSala, other.nombreSala);
 	}
 
-	private int idSala;
-	private int idCine;
-	private String nombreSala;
+	private static int idSala;
+	private static int idCine;
+	private static String nombreSala;
 
 	/**
 	 * @return the idSala

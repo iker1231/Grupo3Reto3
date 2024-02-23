@@ -20,13 +20,20 @@ import java.awt.Color;
 import java.awt.ComponentOrientation;
 import javax.swing.ListSelectionModel;
 import java.beans.PropertyChangeListener;
+import java.sql.Date;
+import java.time.LocalDate;
 import java.beans.PropertyChangeEvent;
 import javax.swing.SwingConstants;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import vista.Error;
 import modelo.Cliente;
+import modelo.Compra;
+import modelo.Entrada;
+import modelo.NoEnBD;
+import modelo.Sesion;
 import sql.ClientesSql;
+import sql.CompraSQL;
 import sql.NoAsientosSQL;
 
 import javax.swing.JSpinner;
@@ -46,8 +53,11 @@ public class NoAsientos extends JPanel {
 	private JTable table;
 
 	public NoAsientos(GestorVentanas v) {
+		float precio = 0;
+		CompraSQL compra = new CompraSQL();
 		NoAsientosSQL asientos = new NoAsientosSQL();
 		ClientesSql clientesSql = new ClientesSql();
+		Sesion sesion = new Sesion();
 		setLayout(null);
 
 		JButton btnExit = new JButton("Salir");
@@ -111,9 +121,36 @@ public class NoAsientos extends JPanel {
 		JButton btnContinuar = new JButton("siguiente");
 		btnContinuar.addMouseListener(new MouseAdapter() {
 			@Override
+			//genero compra en bbdd uso su id en entrada y despues de crear todas las entradas termino compra
 			public void mouseClicked(MouseEvent e) {
-				v.cambiarPanel(5);
-				v.setVisible(true);
+				Compra comprada = new Compra();
+				
+				int a = compra.compra1();
+				Entrada entrada = new Entrada();
+				entrada.setIdSesion(sesion.getIdSesion());
+				Date date = Date.valueOf(LocalDate.now());
+				entrada.setFechaEmision(date);
+				for (int i =0; i <= (int) spinner.getValue(); i++) {
+					compra.entrada();
+					
+					
+					
+				}
+				CompraSQL loco = new CompraSQL();
+				NoEnBD butacas = new NoEnBD();
+				butacas.setButacas((int) spinner.getValue());
+				int ventanaYesNot = JOptionPane.showConfirmDialog(null, "¿Seguir comprando?", v.getTitle(),
+						JOptionPane.YES_NO_OPTION);
+				// 0=yes, 1=no, 2=cancel
+				if (ventanaYesNot == 0) {
+					v.cambiarPanel(3);
+					v.setVisible(true);
+				} else if (ventanaYesNot == 1) {
+					compra.compra2();
+					v.cambiarPanel(5);
+					v.setVisible(true);
+					
+				}
 			}
 		});
 		btnContinuar.setBounds(479, 411, 89, 23);
@@ -123,6 +160,7 @@ public class NoAsientos extends JPanel {
 			public void stateChanged(ChangeEvent e) {
 				float a = 0;
 				float porcent = 0;
+				Compra comprada = new Compra();
 				
 				lblShowPrecioEtrada.setText(Float.toString(asientos.precio()) + "€");
 				lblShowPrecio.setText(Float.toString(asientos.precio()) + "€");
@@ -132,7 +170,9 @@ public class NoAsientos extends JPanel {
 					} else {
 						porcent = 50;
 					}
+					comprada.setDescuento(porcent);
 					a = ((asientos.precio()*Integer.parseInt(spinner.getValue().toString())) - porcent/100 * (asientos.precio()*Integer.parseInt(spinner.getValue().toString())));
+					comprada.setPrecioTotal(a);
 					lblShowPrecio.setText(Float.toString(a) + "€");
 					lblDescuento.setText(Float.toString(porcent) + "%");
 					

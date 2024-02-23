@@ -20,8 +20,8 @@ public class Cine {
 		return idCine == other.idCine && Objects.equals(nombreCine, other.nombreCine);
 	}
 
-	private int idCine;
-	private String nombreCine;
+	private static int idCine;
+	private static String nombreCine;
 
 	
 	public Cine(int idCine, String nombreCine) {

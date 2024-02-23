@@ -2,10 +2,10 @@ package modelo;
 
 public class Pelicula {
 
-	private int idPelicula;
-	private String titulo;
-	private String generoPe;
-	private String duracion;
+	private static int idPelicula;
+	private static String titulo;
+	private static String generoPe;
+	private static String duracion;
 
 	/**
 	 * @param idPelicula
@@ -83,5 +83,10 @@ public class Pelicula {
 	public String toString() {
 		return "Peliculas [idPelicula=" + idPelicula + ", titulo=" + titulo + ", generoPe=" + generoPe + ", duracion="
 				+ duracion + "]";
+	}
+	public void almacenar() {
+		Pelicula2 pelicula = new Pelicula2(getIdPelicula(), getTitulo(), getGeneroPe(), getDuracion());
+		Pelicula2 peli = new Pelicula2();
+		peli.setContador();
 	}
 }

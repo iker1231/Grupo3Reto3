@@ -23,6 +23,7 @@ public class SelectPeliSql {
 	private int cineId;
 
 	public String[] nombrePelicula() {
+		
 		Connection connection = null;
 		ResultSet rs = null;
 		Statement statement = null;
@@ -130,7 +131,7 @@ public class SelectPeliSql {
 			p.setTitulo(rs2.getString("Titulo"));
 			p.setDuracion(rs2.getString("Duracion"));
 			p.setGeneroPe(rs2.getString("GeneroPe"));
-			select.genero = rs2.getString("GeneroPe");
+			p.almacenar();
 
 		} catch (SQLException sqle) {
 			JOptionPane.showMessageDialog(null, "ERROR, Vuelve a intentarlo4");
@@ -159,11 +160,14 @@ public class SelectPeliSql {
 		ResultSet rs = null;
 		Statement statement = null;
 		String all;
+		Sesion sesion= new Sesion();
+		Cine cine = new Cine();
 		ArrayList<String> horarioCine = new ArrayList<String>();
 		ArrayList<String> a = new ArrayList<String>();
 		ArrayList<String> b = new ArrayList<String>();
 		ArrayList<String> c = new ArrayList<String>();
 		int i = 0;
+		
 
 		try {
 
@@ -188,8 +192,10 @@ public class SelectPeliSql {
 				all = rs.getString("NombreSala");
 				a.add(all);
 				all = rs.getString("NombreCine");
+				cine.setNombreCine(all);
 				b.add(all);
 				sesionId = rs.getInt("IdSesion");
+				sesion.setIdSesion(sesionId);
 				asientos.sesionId = NumP;
 				int all1 = rs.getInt("IdCine");
 				cineId = all1;
@@ -217,7 +223,6 @@ public class SelectPeliSql {
 				}
 			}
 			*/
-			Cine cine = new Cine();
 			cine.setIdCine(cineId);
 
 			for (int j = 0; j < a.size(); j++) {

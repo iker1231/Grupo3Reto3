@@ -22,12 +22,12 @@ public class Cliente {
 				&& Objects.equals(generoCli, other.generoCli) && Objects.equals(nombreCli, other.nombreCli);
 	}
 
-	private String dni;
-	private String fechaNacimiento;
-	private String nombreCli;
-	private String apellidoCli;
-	private String generoCli;
-	private String contrasena;
+	private static String dni;
+	private static String fechaNacimiento;
+	private static String nombreCli;
+	private static String apellidoCli;
+	private static String generoCli;
+	private static String contrasena;
 
 	/**
 	 * @return the dni

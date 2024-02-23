@@ -25,13 +25,13 @@ public class Sesion {
 				&& Float.floatToIntBits(precio) == Float.floatToIntBits(other.precio);
 	}
 
-	private int idSesion;
-	private int idPelicula;
-	private int idSala;
-	private String idioma;
-	private float precio;
-	private String fechaSesion;
-	private int horario;
+	private static  int idSesion;
+	private static int idPelicula;
+	private static int idSala;
+	private static String idioma;
+	private static float precio;
+	private static String fechaSesion;
+	private static int horario;
 	/**
 	 * @return the idSesion
 	 */
@@ -56,7 +56,6 @@ public class Sesion {
 
 
 	public Sesion() {
-		// TODO Auto-generated constructor stub
 	}
 
 

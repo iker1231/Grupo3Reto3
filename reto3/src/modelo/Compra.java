@@ -22,11 +22,11 @@ public class Compra {
 				&& Float.floatToIntBits(precioTotal) == Float.floatToIntBits(other.precioTotal);
 	}
 
-	private String dni;
-	private int idCompra;
-	private String fechaCompra;
-	private float precioTotal;
-	private int descuento;
+	private static String dni;
+	private static int idCompra;
+	private static String fechaCompra;
+	private static float precioTotal;
+	private static float descuento;
 
 	/**
 	 * @return the idCompra
@@ -41,6 +41,10 @@ public class Compra {
 		this.fechaCompra = fechaCompra;
 		this.precioTotal = precioTotal;
 		this.descuento = descuento;
+	}
+
+	public Compra() {
+		// TODO Auto-generated constructor stub
 	}
 
 	public String getDni() {
@@ -83,21 +87,21 @@ public class Compra {
 	 * @param precioTotal the precioTotal to set
 	 */
 	public void setPrecioTotal(float precioTotal) {
-		this.precioTotal = precioTotal;
+		this.precioTotal = this.precioTotal + precioTotal;
 	}
 
 	/**
 	 * @return the descuento
 	 */
-	public int getDescuento() {
+	public float getDescuento() {
 		return descuento;
 	}
 
 	/**
-	 * @param descuento the descuento to set
+	 * @param porcent the descuento to set
 	 */
-	public void setDescuento(int descuento) {
-		this.descuento = descuento;
+	public void setDescuento(float porcent) {
+		this.descuento = porcent;
 	}
 
 	@Override
